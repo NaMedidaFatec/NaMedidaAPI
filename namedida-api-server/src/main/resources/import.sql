@@ -1,0 +1,1 @@
+INSERT INTO estado (enabled, created_at, updated_at, nome, uf)VALUES(true, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),'São Paulo', 'SP') ;
