@@ -18,4 +18,7 @@ public class Estado extends EntidadeDominio {
 
     @NotNull(message = "O nome do estado é obrigatório")
     private String nome;
+
+    @ManyToOne
+    private Pais pais;
 }

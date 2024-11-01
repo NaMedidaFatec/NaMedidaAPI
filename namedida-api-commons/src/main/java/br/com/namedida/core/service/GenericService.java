@@ -44,7 +44,8 @@ public abstract class GenericService<T extends EntidadeDominio> {
         return this.result;
     }
 
-    public Result update(T entity) {
+    public Result update(T entity, Long id) {
+        entity.setId(id);
         this.executeRules(updateValidations, entity);
         if (!this.result.hasErrors()) {
             this.result.setData(repository.save(entity));
@@ -60,7 +61,7 @@ public abstract class GenericService<T extends EntidadeDominio> {
                 repository.delete(entity);
             }
         } catch (NoSuchElementException e) {
-            this.result.addError(new BusinessError("Categoria não encontrada"));
+            this.result.addError(new BusinessError("Entidade não encontrada"));
         }
         return this.result;
     }

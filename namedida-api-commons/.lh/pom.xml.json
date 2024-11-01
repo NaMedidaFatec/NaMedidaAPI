@@ -1,0 +1,18 @@
+{
+    "sourceFile": "pom.xml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1727804356017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1727804356017,
+            "name": "Commit-0",
+            "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n\t<modelVersion>4.0.0</modelVersion>\n\t<parent>\n\t\t<groupId>br.com.namedida</groupId>\n\t\t<artifactId>namedida-api-codebase</artifactId>\n\t\t<version>0.0.1-SNAPSHOT</version>\n\t</parent>\n\n\t<artifactId>namedida-api-commons</artifactId>\n\t<version>0.0.1-SNAPSHOT</version>\n\t<packaging>jar</packaging>\n\t<name>namedida-api-commons</name>\n\t<description>Module for classes and interfaces</description>\n</project>\n"
+        }
+    ]
+}

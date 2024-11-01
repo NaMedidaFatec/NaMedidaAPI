@@ -47,7 +47,7 @@ public abstract class GenericController<T extends EntidadeDominio> {
     @PutMapping("/{id}")
     public ResponseEntity<ResponseDTO> update(@PathVariable Long id, @Valid @RequestBody T entity) {
         try {
-            return this.generateResponse(service.update(entity), HttpStatus.OK);
+            return this.generateResponse(service.update(entity, id), HttpStatus.OK);
         } catch (Exception e) {
 
         }

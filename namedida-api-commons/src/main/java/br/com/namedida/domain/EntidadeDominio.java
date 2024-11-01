@@ -30,5 +30,10 @@ public abstract class EntidadeDominio {
     private Date updatedAt;
 
     @Column
-    private Boolean enabled = false;
+    private Boolean enabled = true;
+
+//    public EntidadeDominio(Long id, Boolean enabled) {
+//        this.id = id;
+//        this.enabled = enabled;
+//    }
 }

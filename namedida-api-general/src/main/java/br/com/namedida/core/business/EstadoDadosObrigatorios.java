@@ -17,11 +17,8 @@ public class EstadoDadosObrigatorios implements IValidation<Estado> {
 
     @Override
     public Result execute(Estado estado) {
-
-        result.addError(new BusinessError("O campo data é obrigatório."));
-
-
         if(estado.getNome() == null  || estado.getNome().equals("")) {
+            result.addError(new BusinessError("O campo nome é obrigatório."));
         }
 
         return this.result;
