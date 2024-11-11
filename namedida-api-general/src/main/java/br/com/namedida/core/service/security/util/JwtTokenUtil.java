@@ -1,6 +1,8 @@
 package br.com.namedida.core.service.security.util;
 
 import br.com.namedida.core.persistence.UsuarioDepartamentoRepository;
+import br.com.namedida.core.persistence.UsuarioUnidadeEnsinoRepository;
+import br.com.namedida.domain.enums.TipoUsuario;
 import br.com.namedida.domain.security.UserAuthenticated;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -19,6 +21,10 @@ public class JwtTokenUtil {
 
     @Autowired
     private UsuarioDepartamentoRepository usuarioRepository;
+    @Autowired
+    private UsuarioDepartamentoRepository usuarioDepartamentoRepository;
+    @Autowired
+    private UsuarioUnidadeEnsinoRepository usuarioUnidadeEnsinoRepository;
 
     public String generateJwtToken(UserAuthenticated user) {
         Map<String, Object> claims = new HashMap<>();
@@ -29,7 +35,7 @@ public class JwtTokenUtil {
 
         return Jwts.builder().setClaims(claims).setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 7200 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 72000 * 1000))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
@@ -40,13 +46,23 @@ public class JwtTokenUtil {
         if(!valid) {
             return Optional.empty();
         }
+
+        UserAuthenticated usuario = null;
         Long id = claims.get("id", Long.class);
         String email = claims.get("email", String.class);
+        String tipoUsuario = claims.get("tipoUsuario", String.class);
 
-        UserAuthenticated usuario = usuarioRepository.findById(id)
-                .map(UserAuthenticated::new)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException("Usuário não encontrado com o e-mail: " + email));
+        if (tipoUsuario.equalsIgnoreCase(TipoUsuario.DEPARTAMENTO.name())) {
+            usuario = usuarioDepartamentoRepository.findById(id)
+                    .map(UserAuthenticated::new)
+                    .orElseThrow(
+                            () -> new UsernameNotFoundException("Usuário não encontrado com o e-mail: " + email));
+        } else {
+            usuario = usuarioUnidadeEnsinoRepository.findById(id)
+                    .map(UserAuthenticated::new)
+                    .orElseThrow(
+                            () -> new UsernameNotFoundException("Usuário não encontrado com o e-mail: " + email));
+        }
 
         return Optional.of(usuario);
     }

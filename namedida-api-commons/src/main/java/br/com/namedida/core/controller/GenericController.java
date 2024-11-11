@@ -24,10 +24,31 @@ public abstract class GenericController<T extends EntidadeDominio> {
         return null;
     }
 
+    @GetMapping("/enabled/{enabled}")
+    public ResponseEntity<ResponseDTO> listAllEntity(@PathVariable boolean enabled) {
+        try {
+            return this.generateResponse(service.findAllEnabled(enabled), HttpStatus.OK);
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDTO> findEntity(@PathVariable Long id) {
         try {
             return this.generateResponse(service.findOne(id), HttpStatus.OK);
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    @PutMapping("/toggle/{id}")
+    public ResponseEntity<ResponseDTO> toggleEnabledEntity(@PathVariable Long id) {
+        try {
+            return this.generateResponse(service.toggleEnabledEntity(id), HttpStatus.OK);
         } catch (Exception e) {
 
         }

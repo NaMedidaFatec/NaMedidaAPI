@@ -1,6 +1,9 @@
 package br.com.namedida.domain.security;
 
+import br.com.namedida.domain.EntidadeDominio;
 import br.com.namedida.domain.Usuario;
+import br.com.namedida.domain.UsuarioDepartamento;
+import br.com.namedida.domain.UsuarioUnidadeEnsino;
 import br.com.namedida.domain.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -13,10 +16,25 @@ import java.util.List;
 @Getter
 public class UserAuthenticated implements UserDetails {
     @JsonIgnore
-    public final Usuario user;
+    public Usuario user;
+    public UsuarioDepartamento userDepartamento = null;
+    public UsuarioUnidadeEnsino userUnidadeEnsino = null;
 
-    public UserAuthenticated(Usuario user) {
+    public UserAuthenticated(UsuarioUnidadeEnsino user) {
         this.user = user;
+        this.userUnidadeEnsino = user;
+    }
+
+    public UserAuthenticated(UsuarioDepartamento user) {
+        this.user = user;
+        this.userDepartamento = user;
+    }
+
+    public Usuario getUser() {
+        if (userDepartamento != null) {
+            return userDepartamento;
+        }
+        return userUnidadeEnsino;
     }
 
     public String getTipoUsuario() {
@@ -24,25 +42,21 @@ public class UserAuthenticated implements UserDetails {
     }
 
     public Long getId() {
-        return user.getId();
+        return getUser().getId();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return getUser().getEmail();
     }
 
     public String getEmail() {
-        return user.getEmail();
-    }
-
-    public Usuario getUsuario() {
-        return user;
+        return getUser().getEmail();
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return getUser().getPassword();
     }
 
     @Override
@@ -67,6 +81,6 @@ public class UserAuthenticated implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getEnabled();
+        return getUser().getEnabled();
     }
 }

@@ -68,6 +68,7 @@ public class UnidadeEnsinoService extends GenericService<UnidadeEnsino> {
         UnidadeEnsino unidadeEnsino = UnidadeEnsino.unidadeensinoBuilder()
                 .departamento(DepartamentoValidator.validate(form.getDepartamento()))
                 .horarioAbertura(form.getHorarioAbertura())
+                .cie(form.getCie())
                 .horarioFechamento(form.getHorarioFechamento())
                 .responsavel(responsavel)
                 .qtdAlunosMatriculados(0)

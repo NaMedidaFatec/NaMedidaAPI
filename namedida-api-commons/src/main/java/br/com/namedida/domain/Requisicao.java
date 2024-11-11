@@ -38,6 +38,8 @@ public class Requisicao extends EntidadeDominio {
     @ManyToOne
     private UnidadeEnsino unidadeEnsino;
 
+    private String observacoesCancelamento;
+
     @Builder(builderMethodName = "requisicaoBuilder")
     public Requisicao(Long id, String observacoes, LocalDate data, boolean finalizada, Usuario solicitante, int qtdItensPendentes, Departamento departamento, UnidadeEnsino unidadeEnsino) {
         this.observacoes = observacoes;

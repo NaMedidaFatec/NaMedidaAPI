@@ -31,6 +31,11 @@ public abstract class GenericService<T extends EntidadeDominio> {
         return this.result;
     }
 
+    public Result findAllEnabled(boolean enabled) {
+        this.result.setData(repository.findAllByEnabled(enabled));
+        return this.result;
+    }
+
     public Result findOne(Long id) {
         this.result.setData(repository.findById(id).get());
         return this.result;
@@ -53,12 +58,27 @@ public abstract class GenericService<T extends EntidadeDominio> {
         return this.result;
     }
 
+    public Result toggleEnabledEntity(Long id) {
+        try {
+            T entity = this.repository.findById(id).get();
+//            this.executeRules(deleteValidations, entity);
+            if (!this.result.hasErrors()) {
+                entity.setEnabled(!entity.getEnabled());
+                this.result.setData(repository.save(entity));
+            }
+        } catch (NoSuchElementException e) {
+            this.result.addError(new BusinessError("Entidade não encontrada"));
+        }
+        return this.result;
+    }
+
     public Result delete(Long id) {
         try {
             T entity = this.repository.findById(id).get();
             this.executeRules(deleteValidations, entity);
             if (!this.result.hasErrors()) {
-                repository.delete(entity);
+                entity.setEnabled(false);
+                repository.save(entity);
             }
         } catch (NoSuchElementException e) {
             this.result.addError(new BusinessError("Entidade não encontrada"));

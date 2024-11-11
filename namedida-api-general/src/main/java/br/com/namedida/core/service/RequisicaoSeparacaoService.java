@@ -6,6 +6,7 @@ import br.com.namedida.core.persistence.GenericRepository;
 import br.com.namedida.core.service.security.bean.StakeholdersBean;
 import br.com.namedida.core.validator.RequisicaoValidator;
 import br.com.namedida.domain.RequisicaoSeparacao;
+import br.com.namedida.domain.Usuario;
 import br.com.namedida.domain.form.RequisicaoSeparacaoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,13 +34,19 @@ public class RequisicaoSeparacaoService extends GenericService<RequisicaoSeparac
 
 
     public Result save(RequisicaoSeparacaoForm form) throws Exception {
+        Usuario separadoPor;
+        if (stakeholdersBean.getUsuarioDepartamento() == null) {
+            separadoPor = stakeholdersBean.getUsuarioDepartamento();
+        } else {
+            separadoPor = stakeholdersBean.getUsuarioUnidadeEnsino();
+        }
         RequisicaoSeparacao requisicao = RequisicaoSeparacao.requisicaoSeparacaoBuilder()
                 .id(form.getId())
                 .observacoes(form.getObservacoes())
                 .data(LocalDate.now())
                 .finalizada(form.isFinalizada())
                 .requisicao(RequisicaoValidator.validate(form.getRequisicao()))
-                .separadoPor(stakeholdersBean.getUsuario())
+                .separadoPor(separadoPor)
                 .build();
 
         this.executeRules(this.saveValidations, requisicao);

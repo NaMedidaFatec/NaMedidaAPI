@@ -1,6 +1,7 @@
 package br.com.namedida.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,8 +19,9 @@ public class Usuario extends EntidadeDominio {
   private String nome;
   private String cpf;
   private LocalDate dataNascimento;
+
+  @NotNull
   private String email;
-  private String username;
   private String password;
 
   @JoinColumn(name = "endereco_id")
@@ -39,7 +41,6 @@ public class Usuario extends EntidadeDominio {
     this.cpf = cpf;
     this.dataNascimento = dataNascimento;
     this.email = email;
-    this.username = username;
     this.password = password;
     this.endereco = endereco;
     this.telefone = telefone;

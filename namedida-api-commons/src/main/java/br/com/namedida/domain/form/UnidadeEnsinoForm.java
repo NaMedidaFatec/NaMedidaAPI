@@ -14,6 +14,7 @@ public class UnidadeEnsinoForm extends PJForm {
         private LocalTime horarioFechamento;
         private String nivelEnsino;
         private ResponsavelForm responsavelForm;
+        private String cie;
         UnidadeEnsinoForm(String nome, String email, TelefoneForm telefoneForm, EnderecoForm enderecoForm) {
                 super(nome, email, telefoneForm, enderecoForm);
         }

@@ -1,8 +1,6 @@
 package br.com.namedida.core.service.security.bean;
 
-import br.com.namedida.domain.Departamento;
-import br.com.namedida.domain.UnidadeEnsino;
-import br.com.namedida.domain.Usuario;
+import br.com.namedida.domain.*;
 import br.com.namedida.domain.security.UserAuthenticated;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +16,15 @@ import org.springframework.web.context.WebApplicationContext;
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class StakeholdersBean {
     private Departamento departamento;
-    private UnidadeEnsino unidadeEnsino;
-    private Usuario usuario;
+    private UsuarioDepartamento usuarioDepartamento;
+    private UsuarioUnidadeEnsino usuarioUnidadeEnsino;
+
+
+    public UnidadeEnsino getUnidadeEnsino() {
+        return usuarioUnidadeEnsino.getUnidadeEnsino();
+    }
+
+    public Departamento getDepartamento() {
+        return usuarioDepartamento.getDepartamento();
+    }
 }

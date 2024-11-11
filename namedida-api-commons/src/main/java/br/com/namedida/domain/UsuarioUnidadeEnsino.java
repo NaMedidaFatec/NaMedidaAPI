@@ -1,12 +1,11 @@
 package br.com.namedida.domain;
 
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import br.com.namedida.domain.enums.TipoUsuario;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -28,11 +27,16 @@ public class UsuarioUnidadeEnsino extends Usuario {
     private String cargo;
     private String registro;
 
+    @JoinColumn(name = "unidadeEnsino_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private UnidadeEnsino unidadeEnsino;
+
     @Builder(builderMethodName="usuarioUnidadeEnsino")
-    public UsuarioUnidadeEnsino(String nome, String cpf, LocalDate dataNascimento, String email, String username, String password, Endereco endereco, Telefone telefone, String tipoUsuario, String setor, String cargo, String registro) {
-        super(nome, cpf, dataNascimento, email, username, password, endereco, telefone, tipoUsuario);
+    public UsuarioUnidadeEnsino(String nome, String cpf, LocalDate dataNascimento, String email, String username, String password, Endereco endereco, Telefone telefone, String setor, String cargo, String registro, UnidadeEnsino unidadeEnsino) {
+        super(nome, cpf, dataNascimento, email, username, password, endereco, telefone, TipoUsuario.UNIDADE_ENSINO.name());
         this.setor = setor;
         this.cargo = cargo;
         this.registro = registro;
+        this.unidadeEnsino = unidadeEnsino;
     }
 }

@@ -4,6 +4,7 @@ import br.com.namedida.core.persistence.UsuarioDepartamentoRepository;
 import br.com.namedida.core.persistence.UsuarioUnidadeEnsinoRepository;
 import br.com.namedida.core.service.security.util.JwtTokenUtil;
 import br.com.namedida.core.validator.CidadeValidator;
+import br.com.namedida.core.validator.UnidadeEnsinoValidator;
 import br.com.namedida.domain.*;
 import br.com.namedida.domain.enums.TipoUsuario;
 import br.com.namedida.domain.form.AuthenticationForm;
@@ -21,27 +22,24 @@ public class AuthenticationService {
     private final UsuarioDepartamentoRepository usuarioDepartamentoRepository;
     private final UsuarioUnidadeEnsinoRepository  usuarioUnidadeEnsinoRepository;
 
-
-
     public String authenticate(AuthenticationForm authenticationForm) {
         UserAuthenticated userDetail = null;
         if (authenticationForm.getTipoUsuario().equals(TipoUsuario.DEPARTAMENTO)) {
             userDetail = usuarioDepartamentoRepository.findByEmailAndPassword(authenticationForm.getEmail(),  authenticationForm.getPassword())
                     .map(UserAuthenticated::new)
                     .orElseThrow(
-                            () -> new UsernameNotFoundException("Usuário da instituição de ensino não encontrado com o e-mail: " + authenticationForm.getEmail()));
+                            () -> new UsernameNotFoundException("Usuário do departamento não encontrado com o e-mail: " + authenticationForm.getEmail()));
         } else {
             userDetail = usuarioUnidadeEnsinoRepository.findByEmailAndPassword(authenticationForm.getEmail(),  authenticationForm.getPassword())
                     .map(UserAuthenticated::new)
                     .orElseThrow(
-                            () -> new UsernameNotFoundException("Usuário do departamento não encontrado com o e-mail: " + authenticationForm.getEmail()));
+                            () -> new UsernameNotFoundException("Usuário da instituição de ensino não encontrado com o e-mail: " + authenticationForm.getEmail()));
         }
         return tokenUtil.generateJwtToken(userDetail);
     }
 
-
-    public Usuario signin(AuthenticationForm signinForm) throws Exception {
-        EnderecoForm enderecoForm = signinForm.getEnderecoForm();
+    public Usuario signup(AuthenticationForm form) throws Exception {
+        EnderecoForm enderecoForm = form.getEnderecoForm();
         Endereco endereco = Endereco.enderecoBuilder()
                 .numero(enderecoForm.getNumero())
                 .logradouro(enderecoForm.getLogradouro())
@@ -51,22 +49,22 @@ public class AuthenticationService {
                 .cidade(CidadeValidator.validate(enderecoForm.getCidade()))
                 .build();
 
-        TelefoneForm telefoneForm = signinForm.getTelefoneForm();
+        TelefoneForm telefoneForm = form.getTelefoneForm();
         Telefone telefone = Telefone.telefoneBuilder()
                 .numero(telefoneForm.getNumero())
                 .ddd(telefoneForm.getDdd())
                 .build();
 
-        if (signinForm.getTipoUsuario().equals(TipoUsuario.DEPARTAMENTO) ) {
+        if (form.getTipoUsuario().equals(TipoUsuario.DEPARTAMENTO) ) {
             UsuarioDepartamento usuarioDepartamento = UsuarioDepartamento.usuarioDepartamentoBuilder()
-                            .nome(signinForm.getNome())
-                            .cpf(signinForm.getCpf())
-                            .dataNascimento(signinForm.getDataNascimento())
-                            .email(signinForm.getEmail())
-                            .username(signinForm.getUsername())
-                            .password(signinForm.getPassword())
-                            .cargo(signinForm.getCargo())
-                            .registro(signinForm.getRegistro())
+                            .nome(form.getNome())
+                            .cpf(form.getCpf())
+                            .dataNascimento(form.getDataNascimento())
+                            .email(form.getEmail())
+                            .username(form.getUsername())
+                            .password(form.getPassword())
+                            .cargo(form.getCargo())
+                            .registro(form.getRegistro())
                             .endereco(endereco)
                             .telefone(telefone)
                             .build();
@@ -74,15 +72,16 @@ public class AuthenticationService {
             return usuarioDepartamento;
         }
         UsuarioUnidadeEnsino usuarioUnidadeEnsino = UsuarioUnidadeEnsino.usuarioUnidadeEnsino()
-                        .nome(signinForm.getNome())
-                        .cpf(signinForm.getCpf())
-                        .dataNascimento(signinForm.getDataNascimento())
-                        .email(signinForm.getEmail())
-                        .username(signinForm.getUsername())
-                        .password(signinForm.getPassword())
-                        .setor(signinForm.getSetor())
-                        .cargo(signinForm.getCargo())
-                        .registro(signinForm.getRegistro())
+                        .nome(form.getNome())
+                        .cpf(form.getCpf())
+                        .dataNascimento(form.getDataNascimento())
+                        .unidadeEnsino(UnidadeEnsinoValidator.validate(form.getUnidadeEnsino()))
+                        .email(form.getEmail())
+                        .username(form.getUsername())
+                        .password(form.getPassword())
+                        .setor(form.getSetor())
+                        .cargo(form.getCargo())
+                        .registro(form.getRegistro())
                         .telefone(telefone)
                         .endereco(endereco)
                         .build();

@@ -41,8 +41,14 @@ public class RequisicaoService extends GenericService<Requisicao> {
         this.stakeholdersBean = stakeholdersBean;
     }
 
-
     public Result save(RequisicaoForm form) throws Exception {
+        Usuario solicitante;
+        if (stakeholdersBean.getUsuarioDepartamento() == null) {
+            solicitante = stakeholdersBean.getUsuarioDepartamento();
+        } else {
+            solicitante = stakeholdersBean.getUsuarioUnidadeEnsino();
+        }
+
         Requisicao requisicao = Requisicao.requisicaoBuilder()
                 .id(form.getId())
                 .observacoes(form.getObservacoes())
@@ -50,7 +56,7 @@ public class RequisicaoService extends GenericService<Requisicao> {
                 .finalizada(form.isFinalizada())
                 .departamento(DepartamentoValidator.validate(form.getDepartamento()))
                 .unidadeEnsino(UnidadeEnsinoValidator.validate(form.getUnidadeEnsino()))
-                .solicitante(stakeholdersBean.getUsuario())
+                .solicitante(solicitante)
                 .build();
 
         this.executeRules(this.saveValidations, requisicao);

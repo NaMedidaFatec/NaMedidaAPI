@@ -1,8 +1,8 @@
 package br.com.namedida.domain;
 
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import br.com.namedida.domain.enums.TipoUsuario;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -19,11 +19,15 @@ public class UsuarioDepartamento extends Usuario {
     private String cargo;
     private String registro;
 
-    @Builder(builderMethodName="usuarioDepartamentoBuilder")
+    @JoinColumn(name = "departamento_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Departamento departamento;
 
-    public UsuarioDepartamento(String nome, String cpf, LocalDate dataNascimento, String email, String username, String password, Endereco endereco, Telefone telefone, String tipoUsuario, String cargo, String registro) {
-        super(nome, cpf, dataNascimento, email, username, password, endereco, telefone, tipoUsuario);
+    @Builder(builderMethodName="usuarioDepartamentoBuilder")
+    public UsuarioDepartamento(String nome, String cpf, LocalDate dataNascimento, String email, String username, String password, Endereco endereco, Telefone telefone, String cargo, String registro, Departamento departamento) {
+        super(nome, cpf, dataNascimento, email, username, password, endereco, telefone, TipoUsuario.DEPARTAMENTO.name());
         this.cargo = cargo;
         this.registro = registro;
+        this.departamento = departamento;
     }
 }

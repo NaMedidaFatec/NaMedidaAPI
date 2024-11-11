@@ -53,8 +53,10 @@ public class UnidadeEnsino extends PessoaJuridica {
     @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<UnidadeEnsinoTurma> unidadeEnsinoTurmas = new ArrayList<UnidadeEnsinoTurma>();
 
+    private String cie;
+
     @Builder(builderMethodName="unidadeensinoBuilder")
-    public UnidadeEnsino(String nome, String email, Telefone telefone, Endereco endereco, String razaoSocial, String cnpj, Departamento departamento, LocalTime horarioAbertura, LocalTime horarioFechamento, Integer qtdAlunosMatriculados, Integer qtdRefeicoes, NivelEnsino nivelEnsino, Responsavel responsavel, Collection<UnidadeEnsinoRefeicao> refeicoes, Collection<UnidadeEnsinoTurma> unidadeEnsinoTurmas) {
+    public UnidadeEnsino(String nome, String email, Telefone telefone, Endereco endereco, String razaoSocial, String cnpj, Departamento departamento, LocalTime horarioAbertura, LocalTime horarioFechamento, Integer qtdAlunosMatriculados, Integer qtdRefeicoes, NivelEnsino nivelEnsino, Responsavel responsavel, Collection<UnidadeEnsinoRefeicao> refeicoes, Collection<UnidadeEnsinoTurma> unidadeEnsinoTurmas, String cie) {
         super(nome, email, telefone, endereco, razaoSocial, cnpj);
         this.departamento = departamento;
         this.horarioAbertura = horarioAbertura;
@@ -65,5 +67,6 @@ public class UnidadeEnsino extends PessoaJuridica {
         this.responsavel = responsavel;
         this.refeicoes = refeicoes;
         this.unidadeEnsinoTurmas = unidadeEnsinoTurmas;
+        this.cie = cie;
     }
 }

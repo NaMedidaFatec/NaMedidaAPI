@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/authenticate")
+@CrossOrigin(
+        origins = "*",
+        allowedHeaders = "*",
+        methods = {RequestMethod.HEAD, RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
+)
 public class AuthenticationController {
     private final AuthenticationService service;
 
@@ -26,9 +31,9 @@ public class AuthenticationController {
         return detail;
     }
 
-    @PostMapping("/signin")
-    public Usuario signin(
-            @RequestBody AuthenticationForm signinForm) throws Exception {
-        return service.signin(signinForm);
+    @PostMapping("/signup")
+    public Usuario signup(
+            @RequestBody AuthenticationForm signupForm) throws Exception {
+        return service.signup(signupForm);
     }
 }

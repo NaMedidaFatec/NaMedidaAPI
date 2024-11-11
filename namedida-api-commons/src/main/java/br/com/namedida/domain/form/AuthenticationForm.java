@@ -21,8 +21,7 @@ public class AuthenticationForm {
     private String setor;
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
-
     private EnderecoForm enderecoForm;
     private TelefoneForm telefoneForm;
-
+    private Long unidadeEnsino;
 }

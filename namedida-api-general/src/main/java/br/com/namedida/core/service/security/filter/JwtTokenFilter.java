@@ -3,6 +3,9 @@ package br.com.namedida.core.service.security.filter;
 import br.com.namedida.core.service.security.bean.StakeholdersBean;
 import br.com.namedida.core.service.security.util.JwtTokenUtil;
 import br.com.namedida.domain.Usuario;
+import br.com.namedida.domain.UsuarioDepartamento;
+import br.com.namedida.domain.UsuarioUnidadeEnsino;
+import br.com.namedida.domain.enums.TipoUsuario;
 import br.com.namedida.domain.security.UserAuthenticated;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -52,9 +55,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
-        Usuario usuario = userAuthenticated.get().getUsuario();
 
-        stakeholdersBean.setUsuario(usuario);
+        UsuarioDepartamento usuarioDepartamento = null;
+        UsuarioUnidadeEnsino usuarioUnidadeEnsino = null;
+        if (userAuthenticated.get().getUser().getTipoUsuario().equals(TipoUsuario.DEPARTAMENTO)) {
+            usuarioDepartamento = userAuthenticated.get().getUserDepartamento();
+        } else {
+            usuarioUnidadeEnsino = userAuthenticated.get().getUserUnidadeEnsino();
+        }
+
+        stakeholdersBean.setUsuarioDepartamento(usuarioDepartamento);
+        stakeholdersBean.setUsuarioUnidadeEnsino(usuarioUnidadeEnsino);
+
 
         UsernamePasswordAuthenticationToken
                 authentication = new UsernamePasswordAuthenticationToken(
