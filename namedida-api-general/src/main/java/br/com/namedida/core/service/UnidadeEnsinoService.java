@@ -36,32 +36,38 @@ public class UnidadeEnsinoService extends GenericService<UnidadeEnsino> {
     }
 
     public Result save(UnidadeEnsinoForm form) throws Exception {
-        ResponsavelForm responsavelForm = form.getResponsavelForm();
-        EnderecoForm responsavelEnderecoForm = form.getResponsavelForm().getEnderecoForm();
+        EnderecoForm responsavelEnderecoForm;
+        ResponsavelForm responsavelForm;
+        Responsavel responsavel = new Responsavel();
 
-        Responsavel responsavel = Responsavel.responsavelBuilder()
-                .cargo(responsavelForm.getCargo())
-                .setor(responsavelForm.getSetor())
-                .rg(responsavelForm.getRg())
-                .cpf(responsavelForm.getCpf())
-                .apelido(responsavelForm.getApelido())
-                .dataNascimento(responsavelForm.getDataNascimento())
-                .nome(responsavelForm.getNome())
-                .email(responsavelForm.getEmail())
-                .telefone(Telefone.telefoneBuilder()
-                        .ddd(responsavelForm.getTelefoneForm().getDdd())
-                        .numero(responsavelForm.getTelefoneForm().getNumero()).build())
-                .endereco(Endereco.enderecoBuilder()
-                        .numero(responsavelEnderecoForm.getNumero())
-                        .logradouro(responsavelEnderecoForm.getLogradouro())
-                        .complemento(responsavelEnderecoForm.getComplemento())
-                        .bairro(responsavelEnderecoForm.getBairro())
-                        .cidade(CidadeValidator.validate(responsavelEnderecoForm.getCidade()))
-                        .cep(responsavelEnderecoForm.getCep()).build())
-                .build();
+        if (form.getResponsavelForm() != null) {
+            responsavelForm = form.getResponsavelForm();
+            responsavelEnderecoForm = form.getResponsavelForm().getEnderecoForm();
 
-        if (Strings.isNotBlank(form.getNivelEnsino())) {
-            responsavel.setEscolariade(NivelEnsino.valueOf(responsavelForm.getNivelEnsino()));
+            responsavel = Responsavel.responsavelBuilder()
+                    .cargo(responsavelForm.getCargo())
+                    .setor(responsavelForm.getSetor())
+                    .rg(responsavelForm.getRg())
+                    .cpf(responsavelForm.getCpf())
+                    .apelido(responsavelForm.getApelido())
+                    .dataNascimento(responsavelForm.getDataNascimento())
+                    .nome(responsavelForm.getNome())
+                    .email(responsavelForm.getEmail())
+                    .telefone(Telefone.telefoneBuilder()
+                            .ddd(responsavelForm.getTelefoneForm().getDdd())
+                            .numero(responsavelForm.getTelefoneForm().getNumero()).build())
+                    .endereco(Endereco.enderecoBuilder()
+                            .numero(responsavelEnderecoForm.getNumero())
+                            .logradouro(responsavelEnderecoForm.getLogradouro())
+                            .complemento(responsavelEnderecoForm.getComplemento())
+                            .bairro(responsavelEnderecoForm.getBairro())
+                            .cidade(CidadeValidator.validate(responsavelEnderecoForm.getCidade()))
+                            .cep(responsavelEnderecoForm.getCep()).build())
+                    .build();
+
+            if (Strings.isNotBlank(form.getNivelEnsino())) {
+                responsavel.setEscolariade(NivelEnsino.valueOf(responsavelForm.getNivelEnsino()));
+            }
         }
 
         EnderecoForm unidadeEnsinoEnderecoForm = form.getEnderecoForm();
