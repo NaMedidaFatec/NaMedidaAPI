@@ -42,13 +42,7 @@ public class RequisicaoService extends GenericService<Requisicao> {
     }
 
     public Result save(RequisicaoForm form) throws Exception {
-        Usuario solicitante;
-        if (stakeholdersBean.getUsuarioDepartamento() == null) {
-            solicitante = stakeholdersBean.getUsuarioDepartamento();
-        } else {
-            solicitante = stakeholdersBean.getUsuarioUnidadeEnsino();
-        }
-
+        Usuario solicitante = stakeholdersBean.getUsuarioDepartamento() != null ? stakeholdersBean.getUsuarioDepartamento() : stakeholdersBean.getUsuarioUnidadeEnsino();
         Requisicao requisicao = Requisicao.requisicaoBuilder()
                 .id(form.getId())
                 .observacoes(form.getObservacoes())

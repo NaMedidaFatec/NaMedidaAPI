@@ -34,12 +34,8 @@ public class RequisicaoSeparacaoService extends GenericService<RequisicaoSeparac
 
 
     public Result save(RequisicaoSeparacaoForm form) throws Exception {
-        Usuario separadoPor;
-        if (stakeholdersBean.getUsuarioDepartamento() == null) {
-            separadoPor = stakeholdersBean.getUsuarioDepartamento();
-        } else {
-            separadoPor = stakeholdersBean.getUsuarioUnidadeEnsino();
-        }
+        Usuario separadoPor = stakeholdersBean.getUsuarioDepartamento() != null ? stakeholdersBean.getUsuarioDepartamento() : stakeholdersBean.getUsuarioUnidadeEnsino();
+
         RequisicaoSeparacao requisicao = RequisicaoSeparacao.requisicaoSeparacaoBuilder()
                 .id(form.getId())
                 .observacoes(form.getObservacoes())
