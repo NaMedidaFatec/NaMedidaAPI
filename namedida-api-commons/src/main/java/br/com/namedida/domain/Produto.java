@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,9 @@ public class Produto extends EntidadeDominio {
     @ManyToOne
     @JsonIgnore
     private Departamento departamento;
+
+    @Formula("(SELECT getEstoque(id))")
+    private Double quantidadeEstoque = 0d;
 
     @Builder(builderMethodName="produtoBuilder")
     public Produto(String nome, String descricao, String codigoDeBarras, Categoria categoria, Departamento departamento) {
