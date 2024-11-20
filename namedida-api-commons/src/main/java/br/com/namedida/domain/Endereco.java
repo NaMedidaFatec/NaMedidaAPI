@@ -1,9 +1,6 @@
 package br.com.namedida.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -30,5 +27,16 @@ public class Endereco extends EntidadeDominio {
     this.bairro = bairro;
     this.cep = cep;
     this.cidade = cidade;
+  }
+
+  @Transient
+  public String getEnderecoCompleto() {
+    return String.format("%s, %s - %s, %s - %s",
+            complemento != null ? complemento : "",
+            logradouro,
+            bairro,
+            cep,
+            cidade.getNome()
+    );
   }
 }

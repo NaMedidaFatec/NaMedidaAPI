@@ -1,6 +1,7 @@
 package br.com.namedida.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -21,6 +22,7 @@ public class Requisicao extends EntidadeDominio {
     @NotNull(message = "Observações sobre a requisição de suprimentos")
     private String observacoes;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull(message = "Data da requisição de suprimentos")
     private LocalDate data;
 

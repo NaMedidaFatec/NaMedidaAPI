@@ -2,6 +2,7 @@ package br.com.namedida.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.*;
 
 @Getter
@@ -18,5 +19,16 @@ public class Telefone extends EntidadeDominio {
   public Telefone(String numero, String ddd) {
     this.numero = numero;
     this.ddd = ddd;
+  }
+
+  @Transient
+  public String getTelefoneCompleto() {
+    return String.format("(%s) %s",
+            ddd != null && !ddd.isEmpty() ? ddd : "",
+            numero != null && !numero.isEmpty() ? String.format("%04d-%04d",
+                    Integer.parseInt(numero.substring(0, 4)),
+                    Integer.parseInt(numero.substring(4))
+            ) : ""
+    );
   }
 }

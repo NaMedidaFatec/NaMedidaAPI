@@ -1,5 +1,6 @@
 package br.com.namedida.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -21,11 +22,13 @@ public abstract class EntidadeDominio {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @CreatedDate
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @LastModifiedDate
     private Date updatedAt;
 

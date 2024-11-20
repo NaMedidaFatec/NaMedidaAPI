@@ -3,6 +3,7 @@ package br.com.namedida.core.service;
 import br.com.namedida.core.business.IValidation;
 import br.com.namedida.core.business.Result;
 import br.com.namedida.core.persistence.GenericRepository;
+import br.com.namedida.core.persistence.RequisicaoItemRepository;
 import br.com.namedida.core.service.security.bean.StakeholdersBean;
 import br.com.namedida.core.validator.DepartamentoValidator;
 import br.com.namedida.core.validator.ProdutoValidator;
@@ -18,22 +19,22 @@ import java.util.List;
 
 @Service
 public class RequisicaoItemService extends GenericService<RequisicaoItem> {
-
     private final StakeholdersBean stakeholdersBean;
+    private final RequisicaoItemRepository customRepository;
 
     @Autowired
     public RequisicaoItemService(
-            GenericRepository<RequisicaoItem> repository,
+            RequisicaoItemRepository repository,
             List<IValidation<RequisicaoItem>> saveValidations,
             List<IValidation<RequisicaoItem>> updateValidation, StakeholdersBean stakeholdersBean)
     {
         super();
         this.repository = repository;
+        this.customRepository = repository;
         this.saveValidations = saveValidations;
         this.updateValidations = updateValidation;
         this.stakeholdersBean = stakeholdersBean;
     }
-
 
     public Result save(RequisicaoItemForm form) throws Exception {
         RequisicaoItem requisicaoitem = RequisicaoItem.requisicaoitemItemBuilder()
@@ -46,6 +47,13 @@ public class RequisicaoItemService extends GenericService<RequisicaoItem> {
         this.executeRules(this.saveValidations, requisicaoitem);
         if (!this.result.hasErrors()) {
             this.result.setData(this.repository.save(requisicaoitem));
+        }
+        return this.result;
+    }
+
+    public Result getItens(Long requisicaoId) throws Exception {
+        if (!this.result.hasErrors()) {
+            this.result.setData(customRepository.findAllByRequisicao(RequisicaoValidator.validate(requisicaoId)));
         }
         return this.result;
     }
