@@ -23,7 +23,6 @@ public class UnidadeEnsinoTurma extends EntidadeDominio {
     private String sala;
 
     @ManyToOne
-    @JsonIgnore
     private UnidadeEnsino unidadeEnsino;
 
     @Builder(builderMethodName="unidadeensinoturmaBuilder")
