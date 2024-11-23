@@ -2,8 +2,6 @@ package br.com.namedida.core.controller;
 import br.com.namedida.core.service.MinioService;
 import br.com.namedida.domain.form.MinioForm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +24,7 @@ public class MinioController {
         service.uploadFile(metadata, file);
     }
 
-    @RequestMapping(value="/download/", method = RequestMethod.GET)
+    @RequestMapping(value="/download/", method = RequestMethod.POST)
     public ResponseEntity<byte[]> download(@RequestBody MinioForm form) {
         try {
             HttpHeaders headers = new HttpHeaders();

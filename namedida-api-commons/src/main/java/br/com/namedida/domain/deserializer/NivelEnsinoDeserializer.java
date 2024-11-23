@@ -15,14 +15,14 @@ public class NivelEnsinoDeserializer extends JsonDeserializer<NivelEnsino> {
 
         JsonNode node = parser.getCodec().readTree(parser);
 
-        String descricao = node.get("descricao").asText();
+        String value = node.asText();
 
         for (NivelEnsino nivelEnsino : NivelEnsino.values()) {
-            if (nivelEnsino.getDescricao().equals(descricao)) {
+            if (NivelEnsino.valueOf(value).equals(nivelEnsino)) {
                 return nivelEnsino;
             }
         }
 
-        throw new IllegalArgumentException("Nível de ensino desconhecido: " + descricao);
+        throw new IllegalArgumentException("Nível de ensino desconhecido: " + value);
     }
 }

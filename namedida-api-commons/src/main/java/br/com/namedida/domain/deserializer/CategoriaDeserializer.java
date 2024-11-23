@@ -1,6 +1,7 @@
 package br.com.namedida.domain.deserializer;
 
 import br.com.namedida.domain.enums.Categoria;
+import br.com.namedida.domain.enums.NivelEnsino;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -14,15 +15,14 @@ public class CategoriaDeserializer extends JsonDeserializer<Categoria> {
             throws IOException {
 
         JsonNode node = parser.getCodec().readTree(parser);
-
-        String descricao = node.get("descricao").asText();
+        String value = node.asText();
 
         for (Categoria categoria : Categoria.values()) {
-            if (categoria.getDescricao().equals(descricao)) {
+            if (Categoria.valueOf(value).equals(categoria)) {
                 return categoria;
             }
         }
 
-        throw new IllegalArgumentException("Categoria desconhecida: " + descricao);
+        throw new IllegalArgumentException("Categoria desconhecida: " + value);
     }
 }
