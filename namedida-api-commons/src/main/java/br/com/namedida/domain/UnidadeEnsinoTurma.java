@@ -1,7 +1,10 @@
 package br.com.namedida.domain;
 
 
+import br.com.namedida.domain.deserializer.UnidadeEnsinoDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -23,6 +26,8 @@ public class UnidadeEnsinoTurma extends EntidadeDominio {
     private String sala;
 
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonDeserialize(using = UnidadeEnsinoDeserializer.class)
     private UnidadeEnsino unidadeEnsino;
 
     @Builder(builderMethodName="unidadeensinoturmaBuilder")

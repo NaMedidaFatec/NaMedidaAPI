@@ -25,10 +25,7 @@ public class Telefone extends EntidadeDominio {
   public String getTelefoneCompleto() {
     return String.format("(%s) %s",
             ddd != null && !ddd.isEmpty() ? ddd : "",
-            numero != null && !numero.isEmpty() ? String.format("%04d-%04d",
-                    Integer.parseInt(numero.substring(0, 4)),
-                    Integer.parseInt(numero.substring(4))
-            ) : ""
+            numero != null && !numero.isEmpty() ? numero : ""
     );
   }
 }
