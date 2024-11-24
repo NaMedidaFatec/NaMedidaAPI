@@ -58,7 +58,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         UsuarioDepartamento usuarioDepartamento = null;
         UsuarioUnidadeEnsino usuarioUnidadeEnsino = null;
-        if (userAuthenticated.get().getUser().getTipoUsuario().equals(TipoUsuario.DEPARTAMENTO)) {
+        if (userAuthenticated.get().getUser().getTipoUsuario().equalsIgnoreCase(TipoUsuario.DEPARTAMENTO.name())) {
             usuarioDepartamento = userAuthenticated.get().getUserDepartamento();
         } else {
             usuarioUnidadeEnsino = userAuthenticated.get().getUserUnidadeEnsino();

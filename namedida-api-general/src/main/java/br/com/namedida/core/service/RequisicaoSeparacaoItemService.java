@@ -3,6 +3,7 @@ package br.com.namedida.core.service;
 import br.com.namedida.core.business.IValidation;
 import br.com.namedida.core.business.Result;
 import br.com.namedida.core.persistence.GenericRepository;
+import br.com.namedida.core.persistence.RequisicaoSeparacaoItemRepository;
 import br.com.namedida.core.service.security.bean.StakeholdersBean;
 import br.com.namedida.core.validator.LoteValidator;
 import br.com.namedida.core.validator.ProdutoValidator;
@@ -19,15 +20,17 @@ import java.util.List;
 public class RequisicaoSeparacaoItemService extends GenericService<RequisicaoSeparacaoItem> {
 
     private final StakeholdersBean stakeholdersBean;
+    private final RequisicaoSeparacaoItemRepository customRepository;
 
     @Autowired
     public RequisicaoSeparacaoItemService(
-            GenericRepository<RequisicaoSeparacaoItem> repository,
+            RequisicaoSeparacaoItemRepository repository,
             List<IValidation<RequisicaoSeparacaoItem>> saveValidations,
             List<IValidation<RequisicaoSeparacaoItem>> updateValidation, StakeholdersBean stakeholdersBean)
     {
         super();
         this.repository = repository;
+        this.customRepository = repository;
         this.saveValidations = saveValidations;
         this.updateValidations = updateValidation;
         this.stakeholdersBean = stakeholdersBean;
@@ -46,6 +49,13 @@ public class RequisicaoSeparacaoItemService extends GenericService<RequisicaoSep
         this.executeRules(this.saveValidations, requisicaoitem);
         if (!this.result.hasErrors()) {
             this.result.setData(this.repository.save(requisicaoitem));
+        }
+        return this.result;
+    }
+
+    public Result getSeparacoesItem(Long requisicaoItemId) throws Exception {
+        if (!this.result.hasErrors()) {
+            this.result.setData(customRepository.findAllByRequisicaoItem(RequisicaoItemValidator.validate(requisicaoItemId)));
         }
         return this.result;
     }

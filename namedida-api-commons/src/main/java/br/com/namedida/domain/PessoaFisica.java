@@ -1,6 +1,7 @@
 package br.com.namedida.domain;
 
 import br.com.namedida.domain.enums.TipoPessoa;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,8 @@ public class PessoaFisica extends Pessoa  {
     private String rg;
     private String cpf;
     private String apelido;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     @Enumerated(EnumType.STRING)
     private TipoPessoa tipoPessoa = TipoPessoa.PF;

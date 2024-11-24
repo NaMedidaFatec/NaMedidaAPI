@@ -1,6 +1,7 @@
 package br.com.namedida.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -18,11 +19,14 @@ import java.time.LocalDate;
 public class UnidadeEnsinoTurma extends EntidadeDominio {
     private String nome;
     private Integer quantidade;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate horarioInicial;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate horarioFinal;
     private String sala;
 
     @ManyToOne
+    @JsonIgnore
     private UnidadeEnsino unidadeEnsino;
 
     @Builder(builderMethodName="unidadeensinoturmaBuilder")

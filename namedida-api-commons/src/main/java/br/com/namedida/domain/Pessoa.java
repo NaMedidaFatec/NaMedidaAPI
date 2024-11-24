@@ -21,7 +21,7 @@ public class Pessoa extends EntidadeDominio {
     private Telefone telefone;
 
     @JoinColumn(name = "endereco_id")
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
     @Builder(builderMethodName="pessoaBuilder")

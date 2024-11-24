@@ -1,6 +1,7 @@
 package br.com.namedida.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -20,9 +21,11 @@ public class Lote extends EntidadeDominio {
     @NotNull(message = "A identificação do Lote é obrigatória")
     private String nome;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull(message = "Data de fabricação obrigatória")
     private LocalDate dataFabricacao;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull(message = "Data de vencimento obrigatória")
     private LocalDate dataValidade;
 

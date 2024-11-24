@@ -3,6 +3,8 @@ package br.com.namedida.domain;
 
 import br.com.namedida.domain.enums.Categoria;
 import br.com.namedida.domain.enums.NivelEnsino;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -28,6 +30,7 @@ public class Departamento extends PessoaJuridica {
     @NotNull(message = "Identificação do departamento")
     private String identificador;
 
+    @JsonIgnoreProperties({"departamento"})
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<UnidadeEnsino> escolas = new ArrayList<UnidadeEnsino>();

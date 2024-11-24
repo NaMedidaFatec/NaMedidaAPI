@@ -1,6 +1,7 @@
 package br.com.namedida.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -20,6 +21,7 @@ public class RequisicaoSeparacao extends EntidadeDominio {
     @NotNull(message = "Observações sobre a separação de suprimentos")
     private String observacoes;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull(message = "Data da separação do suprimentos")
     private LocalDate data;
 

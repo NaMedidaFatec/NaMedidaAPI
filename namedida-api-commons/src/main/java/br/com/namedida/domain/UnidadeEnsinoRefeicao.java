@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 public class UnidadeEnsinoRefeicao extends EntidadeDominio {
     private String nome;
     private String descricao;
+
     private LocalDateTime horarioDisponibilidade;
 
     @ManyToOne

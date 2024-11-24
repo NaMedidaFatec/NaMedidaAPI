@@ -25,7 +25,6 @@ public class UnidadeEnsino extends PessoaJuridica {
     private static final long serialVersionUID = 1L;
 
     @ManyToOne
-    @JsonIgnore
     private Departamento departamento;
 
     @NotNull(message = "Identificação do departamento")

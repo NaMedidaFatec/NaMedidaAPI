@@ -3,8 +3,11 @@ package br.com.namedida.core.controller;
 import br.com.namedida.core.business.Result;
 import br.com.namedida.core.service.RequisicaoSeparacaoItemService;
 import br.com.namedida.domain.RequisicaoSeparacaoItem;
+import br.com.namedida.domain.dto.ResponseDTO;
 import br.com.namedida.domain.form.RequisicaoSeparacaoItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(
@@ -27,5 +30,10 @@ public class RequisicaoSeparacaoItemController extends GenericController<Requisi
     public Result save(
             @RequestBody RequisicaoSeparacaoItemForm form) throws Exception {
         return requisicaoService.save(form);
+    }
+
+    @GetMapping("/requisicaoitem/{id}")
+    public ResponseEntity<ResponseDTO> getSeparacoesItem(@PathVariable Long id) throws Exception {
+        return this.generateResponse(requisicaoService.getSeparacoesItem(id), HttpStatus.OK);
     }
 }

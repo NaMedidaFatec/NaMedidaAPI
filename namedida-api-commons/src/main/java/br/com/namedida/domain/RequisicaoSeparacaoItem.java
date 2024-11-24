@@ -27,8 +27,8 @@ public class RequisicaoSeparacaoItem extends EntidadeDominio {
     @ManyToOne
     private Lote estoque;
 
-    @Formula("(SELECT getEstoque(produto_id))")
-    private Double quantidadeEstoque = 0d;
+//    @Formula("(SELECT getEstoque(produto_id))")
+//    private Double quantidadeEstoque = 0d;
 
     @Transient
     @Getter(AccessLevel.NONE)
@@ -49,7 +49,7 @@ public class RequisicaoSeparacaoItem extends EntidadeDominio {
         this.quantidadeEntregue = quantidadeEntregue;
         this.requisicaoItem = requisicaoItem;
         this.estoque = estoque;
-        this.quantidadeEstoque = quantidadeEstoque;
+//        this.quantidadeEstoque = quantidadeEstoque;
         this.quantidade = quantidade;
         this.quantidadePendente = quantidadePendente;
     }

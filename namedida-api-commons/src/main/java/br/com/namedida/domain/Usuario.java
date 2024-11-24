@@ -1,5 +1,6 @@
 package br.com.namedida.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -18,6 +19,8 @@ import java.time.LocalDate;
 public class Usuario extends EntidadeDominio {
   private String nome;
   private String cpf;
+
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private LocalDate dataNascimento;
 
   @NotNull
