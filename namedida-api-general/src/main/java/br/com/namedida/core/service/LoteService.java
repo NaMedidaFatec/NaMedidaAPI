@@ -47,9 +47,9 @@ public class LoteService extends GenericService<Lote> {
         return this.result;
     }
 
-    public Result getLotesByProduto(Long produtoId) throws Exception {
+    public Result getLotesWithEstoqueLivreByProduto(Long produtoId) throws Exception {
         if (!this.result.hasErrors()) {
-            this.result.setData(customRepository.findAllByProduto(ProdutoValidator.validate(produtoId)));
+            this.result.setData(customRepository.findAllByProdutoAndQuantidadeGreaterThan(ProdutoValidator.validate(produtoId), 0d));
         }
         return this.result;
     }

@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RequisicaoSeparacaoItemRepository extends GenericRepository<RequisicaoSeparacaoItem> {
-    List<RequisicaoSeparacaoItem> findAllByRequisicaoItem(RequisicaoItem requisicaoItem);
+    List<RequisicaoSeparacaoItem> findAllByRequisicaoItemAndEnabled(RequisicaoItem requisicaoItem, boolean enabled);
 }

@@ -33,9 +33,8 @@ public class LoteController extends GenericController<Lote> {
             @RequestBody LoteForm form) throws Exception {
         return loteService.save(form);
     }
-
-    @GetMapping("/produto/{id}")
-    public ResponseEntity<ResponseDTO> getLotesByProduto(@PathVariable Long id) throws Exception {
-        return this.generateResponse(loteService.getLotesByProduto(id), HttpStatus.OK);
+    @GetMapping("/livre/produto/{id}")
+    public ResponseEntity<ResponseDTO> getLotesWithEstoqueLivreByProduto(@PathVariable Long id) throws Exception {
+        return this.generateResponse(loteService.getLotesWithEstoqueLivreByProduto(id), HttpStatus.OK);
     }
 }

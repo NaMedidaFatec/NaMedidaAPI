@@ -12,11 +12,8 @@ import java.util.List;
 @Data
 public class RequisicaoSeparacaoItemForm {
         private Long id;
-        private Double quantidade;
         private Double quantidadeEntregue = 0d;
-        private Long lote;
+        private Long estoque;
         private Long requisicaoItem;
-//        @Builder.Default
-//        private List<Lote> lotes = new ArrayList<>();
 }
 
