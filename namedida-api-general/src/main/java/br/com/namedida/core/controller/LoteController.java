@@ -29,10 +29,15 @@ public class LoteController extends GenericController<Lote> {
     }
 
     @PostMapping("/save")
-    public Result save(
-            @RequestBody LoteForm form) throws Exception {
+    public Result save(@RequestBody LoteForm form) throws Exception {
         return loteService.save(form);
     }
+
+    @PutMapping("/entradaItens/{loteId}/{quantidade}")
+    public Result entradaItens(@PathVariable Long loteId, @PathVariable Long quantidade) throws Exception {
+        return loteService.entradaEstoque(loteId, quantidade);
+    }
+
     @GetMapping("/livre/produto/{id}")
     public ResponseEntity<ResponseDTO> getLotesWithEstoqueLivreByProduto(@PathVariable Long id) throws Exception {
         return this.generateResponse(loteService.getLotesWithEstoqueLivreByProduto(id), HttpStatus.OK);

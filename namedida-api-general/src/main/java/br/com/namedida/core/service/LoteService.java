@@ -4,6 +4,7 @@ import br.com.namedida.core.business.IValidation;
 import br.com.namedida.core.business.Result;
 import br.com.namedida.core.persistence.GenericRepository;
 import br.com.namedida.core.persistence.LoteRepository;
+import br.com.namedida.core.validator.LoteValidator;
 import br.com.namedida.core.validator.ProdutoValidator;
 import br.com.namedida.core.validator.RequisicaoItemValidator;
 import br.com.namedida.domain.Lote;
@@ -39,6 +40,18 @@ public class LoteService extends GenericService<Lote> {
                 .produto(ProdutoValidator.validate(form.getProduto()))
                 .quantidade(form.getQuantidade())
                 .build();
+
+        this.executeRules(this.saveValidations, lote);
+        if (!this.result.hasErrors()) {
+            this.result.setData(this.repository.save(lote));
+        }
+        return this.result;
+    }
+
+    public Result entradaEstoque(Long loteId, Long quantidade) throws Exception {
+        Lote lote = LoteValidator.validate(loteId);
+
+        lote.setQuantidade(lote.getQuantidade() + quantidade);
 
         this.executeRules(this.saveValidations, lote);
         if (!this.result.hasErrors()) {
