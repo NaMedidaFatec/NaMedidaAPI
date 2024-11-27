@@ -1,9 +1,13 @@
 package br.com.namedida.domain.form;
 
 import br.com.namedida.domain.enums.TipoUsuario;
+import br.com.namedida.domain.security.PasswordUtil;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Transient;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
@@ -24,4 +28,10 @@ public class AuthenticationForm {
     private EnderecoForm enderecoForm;
     private TelefoneForm telefoneForm;
     private Long unidadeEnsino;
+
+    @Getter(AccessLevel.NONE)
+    private String passwordEncrypted;
+    public String getPasswordEncrypted() {
+        return PasswordUtil.encrypt(password);
+    }
 }

@@ -1,9 +1,6 @@
 package br.com.namedida.domain;
 
 
-import br.com.namedida.domain.enums.Categoria;
-import br.com.namedida.domain.enums.NivelEnsino;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -11,9 +8,6 @@ import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 

@@ -1,8 +1,5 @@
 package br.com.namedida.domain.form;
 
-import br.com.namedida.domain.Produto;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;

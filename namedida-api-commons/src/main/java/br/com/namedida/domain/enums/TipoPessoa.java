@@ -1,10 +1,5 @@
 package br.com.namedida.domain.enums;
 
-import br.com.namedida.domain.deserializer.NivelEnsinoDeserializer;
-import br.com.namedida.domain.serializer.NivelEnsinoSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 public enum TipoPessoa {
     PF("Pessoa Física"),
     PJ("Pessoa Jurídica");

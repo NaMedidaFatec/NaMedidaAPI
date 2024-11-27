@@ -4,8 +4,6 @@ import br.com.namedida.domain.enums.TipoPessoa;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @RequiredArgsConstructor

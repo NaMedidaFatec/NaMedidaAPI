@@ -2,7 +2,6 @@ package br.com.namedida.domain;
 
 
 import br.com.namedida.domain.enums.NivelEnsino;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

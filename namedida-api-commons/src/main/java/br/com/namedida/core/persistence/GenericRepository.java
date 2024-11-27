@@ -1,7 +1,6 @@
 package br.com.namedida.core.persistence;
 
 import br.com.namedida.domain.EntidadeDominio;
-import br.com.namedida.domain.UsuarioDepartamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;

@@ -6,9 +6,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.*;
-import org.hibernate.annotations.Formula;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter

@@ -1,6 +1,5 @@
 package br.com.namedida.domain;
 
-
 import br.com.namedida.domain.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;

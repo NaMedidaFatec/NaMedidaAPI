@@ -7,7 +7,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Getter

@@ -17,10 +17,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-
 import java.util.Arrays;
 import java.util.Collections;
-
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +26,6 @@ import java.util.Collections;
         jsr250Enabled = true
 )
 public class WebSecurityConfig {
-
     private final JwtTokenFilter jwtTokenFilter;
 
     public WebSecurityConfig(JwtTokenFilter jwtTokenFilter) {
@@ -60,8 +57,8 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http =    http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable());
+        http = http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                    .csrf(csrf -> csrf.disable());
 
         http = http
                 .sessionManagement()
@@ -90,7 +87,6 @@ public class WebSecurityConfig {
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
         );
-
         return http.build();
     }
 
@@ -98,7 +94,6 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // Configuração mais permissiva (desenvolvimento)
         config.setAllowedOriginPatterns(Collections.singletonList("*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList(

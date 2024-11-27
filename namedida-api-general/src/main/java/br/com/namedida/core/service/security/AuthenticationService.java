@@ -2,6 +2,7 @@ package br.com.namedida.core.service.security;
 
 import br.com.namedida.core.persistence.UsuarioDepartamentoRepository;
 import br.com.namedida.core.persistence.UsuarioUnidadeEnsinoRepository;
+import br.com.namedida.core.service.security.bean.StakeholdersBean;
 import br.com.namedida.core.service.security.util.JwtTokenUtil;
 import br.com.namedida.core.validator.CidadeValidator;
 import br.com.namedida.core.validator.UnidadeEnsinoValidator;
@@ -10,6 +11,7 @@ import br.com.namedida.domain.enums.TipoUsuario;
 import br.com.namedida.domain.form.AuthenticationForm;
 import br.com.namedida.domain.form.EnderecoForm;
 import br.com.namedida.domain.form.TelefoneForm;
+import br.com.namedida.domain.security.PasswordUtil;
 import br.com.namedida.domain.security.UserAuthenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,20 +23,37 @@ public class AuthenticationService {
     private final JwtTokenUtil tokenUtil;
     private final UsuarioDepartamentoRepository usuarioDepartamentoRepository;
     private final UsuarioUnidadeEnsinoRepository  usuarioUnidadeEnsinoRepository;
+    private final StakeholdersBean stakeholdersBean;
+
 
     public String authenticate(AuthenticationForm authenticationForm) {
         UserAuthenticated userDetail = null;
         if (authenticationForm.getTipoUsuario().equals(TipoUsuario.DEPARTAMENTO)) {
-            userDetail = usuarioDepartamentoRepository.findByEmailAndPassword(authenticationForm.getEmail(),  authenticationForm.getPassword())
+            userDetail = usuarioDepartamentoRepository.findByEmail(authenticationForm.getEmail())
                     .map(UserAuthenticated::new)
                     .orElseThrow(
                             () -> new UsernameNotFoundException("Usuário do departamento não encontrado com o e-mail: " + authenticationForm.getEmail()));
         } else {
-            userDetail = usuarioUnidadeEnsinoRepository.findByEmailAndPassword(authenticationForm.getEmail(),  authenticationForm.getPassword())
+            userDetail = usuarioUnidadeEnsinoRepository.findByEmail(authenticationForm.getEmail())
                     .map(UserAuthenticated::new)
                     .orElseThrow(
                             () -> new UsernameNotFoundException("Usuário da instituição de ensino não encontrado com o e-mail: " + authenticationForm.getEmail()));
         }
+
+        if (!PasswordUtil.verify(authenticationForm.getPassword(), userDetail.getUser().getPassword())) {
+            throw new UsernameNotFoundException("Senha inválida");
+        }
+
+        if (!userDetail.getUser().getEnabled()) {
+            throw new UsernameNotFoundException("Usuário inativo");
+        }
+
+        if (userDetail.getUserUnidadeEnsino() != null) {
+            if (!userDetail.getUserUnidadeEnsino().getUnidadeEnsino().getEnabled()) {
+                throw new UsernameNotFoundException("Escola inativa");
+            }
+        }
+
         return tokenUtil.generateJwtToken(userDetail);
     }
 
@@ -62,7 +81,7 @@ public class AuthenticationService {
                             .dataNascimento(form.getDataNascimento())
                             .email(form.getEmail())
                             .username(form.getUsername())
-                            .password(form.getPassword())
+                            .password(form.getPasswordEncrypted())
                             .cargo(form.getCargo())
                             .registro(form.getRegistro())
                             .endereco(endereco)
@@ -78,7 +97,7 @@ public class AuthenticationService {
                         .unidadeEnsino(UnidadeEnsinoValidator.validate(form.getUnidadeEnsino()))
                         .email(form.getEmail())
                         .username(form.getUsername())
-                        .password(form.getPassword())
+                        .password(form.getPasswordEncrypted())
                         .setor(form.getSetor())
                         .cargo(form.getCargo())
                         .registro(form.getRegistro())

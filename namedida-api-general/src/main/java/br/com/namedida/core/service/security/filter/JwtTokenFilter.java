@@ -64,9 +64,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             usuarioUnidadeEnsino = userAuthenticated.get().getUserUnidadeEnsino();
         }
 
+
         stakeholdersBean.setUsuarioDepartamento(usuarioDepartamento);
         stakeholdersBean.setUsuarioUnidadeEnsino(usuarioUnidadeEnsino);
-
 
         UsernamePasswordAuthenticationToken
                 authentication = new UsernamePasswordAuthenticationToken(

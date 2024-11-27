@@ -1,7 +1,6 @@
 package br.com.namedida.domain.deserializer;
 
 import br.com.namedida.domain.enums.Categoria;
-import br.com.namedida.domain.enums.NivelEnsino;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
