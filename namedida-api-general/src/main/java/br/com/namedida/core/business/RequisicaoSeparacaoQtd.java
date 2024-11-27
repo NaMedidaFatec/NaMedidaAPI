@@ -19,7 +19,9 @@ public class RequisicaoSeparacaoQtd implements IValidation<RequisicaoSeparacaoIt
             result.addError(new BusinessError("A quantidade informada é inválida"));
         }
 
-        if (requisicaoSeparacaoItem.getQuantidadeEntregue() > requisicaoSeparacaoItem.getRequisicaoItem().getQuantidadePendente()) {
+        Double quantidadePendente = requisicaoSeparacaoItem.getId() != null ? requisicaoSeparacaoItem.getRequisicaoItem().getQuantidadePendente() + requisicaoSeparacaoItem.getQuantidadeAprovada() : requisicaoSeparacaoItem.getRequisicaoItem().getQuantidadePendente();
+
+        if (requisicaoSeparacaoItem.getQuantidadeEntregue() > quantidadePendente) {
             result.addError(new BusinessError("A quantidade separada não pode exceder a quantidade pendente"));
         }
 

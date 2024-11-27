@@ -31,6 +31,9 @@ public class RequisicaoSeparacaoItem extends EntidadeDominio {
 //    private Double quantidadeEstoque = 0d;
 
     @Transient
+    private Double quantidadeAprovada;
+
+    @Transient
     @Getter(AccessLevel.NONE)
     private Double quantidade = 0d;
     public Double getQuantidade() {

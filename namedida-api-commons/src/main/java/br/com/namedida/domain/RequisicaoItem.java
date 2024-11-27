@@ -40,7 +40,6 @@ public class RequisicaoItem extends EntidadeDominio {
         return getQuantidade() - getQuantidadeEntregue();
     }
 
-
     @Builder(builderMethodName = "requisicaoitemItemBuilder")
     public RequisicaoItem(Long id, Double quantidade, Double quantidadeEntregue, Produto produto, Double quantidadeEstoque, Requisicao requisicao, Double quantidadePendente) {
         this.quantidade = quantidade;
