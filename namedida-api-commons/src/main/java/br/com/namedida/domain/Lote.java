@@ -35,7 +35,6 @@ public class Lote extends EntidadeDominio {
     private Double quantidade;
 
     @ManyToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JsonDeserialize(using = ProdutoDeserializer.class)
     private Produto produto;
 
