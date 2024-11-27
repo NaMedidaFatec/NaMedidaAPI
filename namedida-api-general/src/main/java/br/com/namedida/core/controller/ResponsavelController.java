@@ -25,7 +25,7 @@ public class ResponsavelController extends GenericController<Responsavel> {
 
     @PostMapping("/save/{nomeResponsavel}")
     public Result save(
-            @RequestParam String nomeResponsavel) throws Exception {
+            @PathVariable String nomeResponsavel) throws Exception {
         return responsavelService.save(nomeResponsavel);
     }
 }
