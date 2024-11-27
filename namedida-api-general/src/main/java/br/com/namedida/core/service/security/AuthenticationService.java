@@ -87,9 +87,15 @@ public class AuthenticationService {
                             .endereco(endereco)
                             .telefone(telefone)
                             .build();
+
+            if (usuarioDepartamentoRepository.findByEmail(usuarioDepartamento.getEmail()).isPresent()) {
+                throw new Error("Já existe um usuário com esse e-mail cadastrado");
+            }
+
             usuarioDepartamento = usuarioDepartamentoRepository.save(usuarioDepartamento);
             return usuarioDepartamento;
         }
+
         UsuarioUnidadeEnsino usuarioUnidadeEnsino = UsuarioUnidadeEnsino.usuarioUnidadeEnsino()
                         .nome(form.getNome())
                         .cpf(form.getCpf())
@@ -104,6 +110,10 @@ public class AuthenticationService {
                         .telefone(telefone)
                         .endereco(endereco)
                         .build();
+
+        if (usuarioUnidadeEnsinoRepository.findByEmail(usuarioUnidadeEnsino.getEmail()).isPresent()) {
+            throw new Error("Já existe um usuário com esse e-mail cadastrado");
+        }
 
         usuarioUnidadeEnsino = usuarioUnidadeEnsinoRepository.save(usuarioUnidadeEnsino);
         return usuarioUnidadeEnsino;
