@@ -97,7 +97,7 @@ public class RequisicaoSeparacaoItemService extends GenericService<RequisicaoSep
 
     public Result deleteItem(Long id) {
         this.result = new Result();
-        this.executeRules(this.saveValidations, this.repository.findById(id).get());
+        this.executeRules(this.deleteValidations, this.repository.findById(id).get());
         if (!this.result.hasErrors()) {
             delete(id);
             RequisicaoSeparacaoItem requisicaoSeparacaoItem = this.repository.findById(id).orElseThrow();
