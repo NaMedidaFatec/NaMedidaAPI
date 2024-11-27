@@ -3,11 +3,8 @@ package br.com.namedida.core.controller;
 import br.com.namedida.core.business.Result;
 import br.com.namedida.core.service.NotificacaoService;
 import br.com.namedida.domain.Notificacao;
-import br.com.namedida.domain.dto.ResponseDTO;
 import br.com.namedida.domain.form.NotificacaoForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(
