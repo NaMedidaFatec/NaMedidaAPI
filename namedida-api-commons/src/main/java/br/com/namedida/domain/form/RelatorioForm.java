@@ -1,9 +1,7 @@
 package br.com.namedida.domain.form;
 
-import br.com.namedida.domain.Usuario;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data

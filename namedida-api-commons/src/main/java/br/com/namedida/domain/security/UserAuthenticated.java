@@ -1,10 +1,8 @@
 package br.com.namedida.domain.security;
 
-import br.com.namedida.domain.EntidadeDominio;
 import br.com.namedida.domain.Usuario;
 import br.com.namedida.domain.UsuarioDepartamento;
 import br.com.namedida.domain.UsuarioUnidadeEnsino;
-import br.com.namedida.domain.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

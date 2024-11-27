@@ -2,11 +2,8 @@ package br.com.namedida.domain;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Formula;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter

@@ -19,7 +19,6 @@ import java.util.List;
 
 @Service
 public class RequisicaoItemService extends GenericService<RequisicaoItem> {
-    private final StakeholdersBean stakeholdersBean;
     private final RequisicaoItemRepository customRepository;
 
     @Autowired
@@ -33,7 +32,6 @@ public class RequisicaoItemService extends GenericService<RequisicaoItem> {
         this.customRepository = repository;
         this.saveValidations = saveValidations;
         this.updateValidations = updateValidation;
-        this.stakeholdersBean = stakeholdersBean;
     }
 
     public Result save(RequisicaoItemForm form) throws Exception {

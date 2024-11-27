@@ -25,7 +25,6 @@ import java.util.List;
 
 @Service
 public class RequisicaoService extends GenericService<Requisicao> {
-
     private final StakeholdersBean stakeholdersBean;
 
     @Autowired

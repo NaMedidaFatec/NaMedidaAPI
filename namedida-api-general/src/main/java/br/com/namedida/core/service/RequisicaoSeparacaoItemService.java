@@ -20,11 +20,9 @@ import java.util.List;
 
 @Service
 public class RequisicaoSeparacaoItemService extends GenericService<RequisicaoSeparacaoItem> {
-    private final StakeholdersBean stakeholdersBean;
     private final RequisicaoSeparacaoItemRepository customRepository;
     private final LoteService loteService;
     private final RequisicaoItemRepository requisicaoItemRepository;
-    private final RequisicaoSeparacaoItemRepository requisicaoSeparacaoItemRepository;
 
     @Autowired
     public RequisicaoSeparacaoItemService(
@@ -39,8 +37,6 @@ public class RequisicaoSeparacaoItemService extends GenericService<RequisicaoSep
         this.customRepository = repository;
         this.saveValidations = saveValidations;
         this.updateValidations = updateValidation;
-        this.stakeholdersBean = stakeholdersBean;
-        this.requisicaoSeparacaoItemRepository = requisicaoSeparacaoItemRepository;
     }
 
     public Result save(RequisicaoSeparacaoItemForm form) throws Exception {

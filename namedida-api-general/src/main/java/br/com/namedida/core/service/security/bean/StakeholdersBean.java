@@ -15,10 +15,8 @@ import org.springframework.web.context.WebApplicationContext;
 @Component
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class StakeholdersBean {
-    private Departamento departamento;
     private UsuarioDepartamento usuarioDepartamento;
     private UsuarioUnidadeEnsino usuarioUnidadeEnsino;
-
 
     public UnidadeEnsino getUnidadeEnsino() {
         return usuarioUnidadeEnsino.getUnidadeEnsino();

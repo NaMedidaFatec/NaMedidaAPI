@@ -1,8 +1,5 @@
 package br.com.namedida.domain.form;
 
-import br.com.namedida.domain.enums.NivelEnsino;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.time.LocalTime;

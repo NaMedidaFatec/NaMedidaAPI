@@ -18,10 +18,8 @@ import java.util.List;
 
 @Service
 public class RequisicaoSeparacaoService extends GenericService<RequisicaoSeparacao> {
-
     private final StakeholdersBean stakeholdersBean;
     private final RequisicaoSeparacaoRepository customRepository;
-
 
     @Autowired
     public RequisicaoSeparacaoService(
@@ -36,7 +34,6 @@ public class RequisicaoSeparacaoService extends GenericService<RequisicaoSeparac
         this.updateValidations = updateValidation;
         this.stakeholdersBean = stakeholdersBean;
     }
-
 
     public Result save(RequisicaoSeparacaoForm form) throws Exception {
         Usuario separadoPor = stakeholdersBean.getUsuarioDepartamento() != null ? stakeholdersBean.getUsuarioDepartamento() : stakeholdersBean.getUsuarioUnidadeEnsino();

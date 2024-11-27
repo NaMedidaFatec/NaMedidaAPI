@@ -2,8 +2,6 @@ package br.com.namedida.domain.form;
 
 import lombok.Data;
 
-import java.time.LocalTime;
-
 @Data
 public class ProdutoForm {
         private String nome;

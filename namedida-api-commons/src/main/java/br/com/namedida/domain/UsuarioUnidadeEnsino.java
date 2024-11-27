@@ -3,15 +3,8 @@ package br.com.namedida.domain;
 
 import br.com.namedida.domain.enums.TipoUsuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Getter
 @Setter

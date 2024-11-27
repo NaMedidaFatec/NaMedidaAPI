@@ -1,7 +1,6 @@
 package br.com.namedida.domain;
 
 import br.com.namedida.domain.enums.NivelEnsino;
-import br.com.namedida.domain.enums.TipoPessoa;
 import jakarta.persistence.*;
 import lombok.*;
 

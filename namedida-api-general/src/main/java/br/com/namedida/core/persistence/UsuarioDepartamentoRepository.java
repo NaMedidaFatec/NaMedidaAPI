@@ -6,5 +6,5 @@ import br.com.namedida.domain.UsuarioDepartamento;
 import java.util.Optional;
 
 public interface UsuarioDepartamentoRepository extends GenericRepository<UsuarioDepartamento> {
-    Optional<UsuarioDepartamento> findByEmailAndPassword(String email, String password);
+    Optional<UsuarioDepartamento> findByEmail(String email);
 }

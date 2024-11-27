@@ -1,11 +1,5 @@
 package br.com.namedida.domain.form;
 
-import br.com.namedida.domain.Endereco;
-import br.com.namedida.domain.Telefone;
-import br.com.namedida.domain.enums.TipoPessoa;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
