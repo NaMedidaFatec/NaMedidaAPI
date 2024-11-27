@@ -19,8 +19,8 @@ public class ResponsavelController extends GenericController<Responsavel> {
     private ResponsavelService responsavelService;
 
     @Autowired
-    public ResponsavelController(ResponsavelService responsavelService) {
-        this.responsavelService = responsavelService;
+    public ResponsavelController(ResponsavelService service) {
+        this.service = service;
     }
 
     @PostMapping("/save/{nomeResponsavel}")

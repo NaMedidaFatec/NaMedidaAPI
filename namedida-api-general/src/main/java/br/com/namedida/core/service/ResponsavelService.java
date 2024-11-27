@@ -23,6 +23,10 @@ public class ResponsavelService extends GenericService<Responsavel> {
         this.updateValidations = updateValidation;
     }
 
+    public ResponsavelService() {
+
+    }
+
     public Result save(String nomeResponsavel) throws Exception {
         Responsavel responsavel = new Responsavel();
 
