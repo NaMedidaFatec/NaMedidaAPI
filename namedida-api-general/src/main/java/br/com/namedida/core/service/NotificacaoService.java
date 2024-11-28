@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotificacaoService extends GenericService<Notificacao> {
@@ -48,6 +49,20 @@ public class NotificacaoService extends GenericService<Notificacao> {
         if (!this.result.hasErrors()) {
             this.result.setData(this.repository.save(notificacao));
         }
+        return this.result;
+    }
+
+    public Result markSeen(Long id) throws Exception {
+        Notificacao notificacao = customRepository.findById(id).orElse(null);
+        if(notificacao != null){
+            notificacao.setVisto(true);
+
+            this.executeRules(this.saveValidations, notificacao);
+            if (!this.result.hasErrors()) {
+                    this.result.setData(this.repository.save(notificacao));
+            }
+        }
+
         return this.result;
     }
 
