@@ -65,8 +65,8 @@ INSERT INTO `refeicao` (`id`, `created_at`, `enabled`, `updated_at`, `descricao`
     (1, '2024-11-06 23:22:42.718000', b'1', '2024-11-06 23:22:42.718000', 'Bolinho Ana Maria e achocolatado', '2024-10-28 12:30:00.000000', 'Café da manhã', 3);
 
 INSERT INTO `usuario` (`discriminator`, `id`, `created_at`, `enabled`, `updated_at`, `cpf`, `dataNascimento`, `email`, `nome`, `password`, `cargo`, `registro`, `setor`, `endereco_id`, `telefone_id`, `departamento_id`, `unidadeEnsino_id`) VALUES
-                                                                                                                                                                                                                               ('departamento', 1, '2024-11-06 23:06:48.886000', b'1', '2024-11-06 23:06:48.886000', '123.456.789-00', '1990-01-01', 'usuario@email.com', 'Nome do Usuário', 'senha123', 'Gerente de contas', '123ABC', NULL, 1, 1, 1, NULL),
-                                                                                                                                                                                                                               ('unidadeensino', 2, '2024-11-06 23:20:42.028000', b'1', '2024-11-06 23:20:42.028000', '123.456.789-00', '1990-01-01', 'usuarioescola@email.com', 'Nome do Usuário', 'senha123', 'Gerente de contas', '123ABC', 'Almoxerifado', 5, 5, NULL, 3);
+                                                                                                                                                                                                                               ('departamento', 1, '2024-11-06 23:06:48.886000', b'1', '2024-11-06 23:06:48.886000', '123.456.789-00', '1990-01-01', 'usuariodepartamento@email.com', 'Nome do Usuário departamento', '$2a$10$xZOX1gKxhyRJozQjxVJNmOWzQv7CBP2QmaWAc4PFumHM5DkKE0ul2', 'Gerente de contas', '123ABC', NULL, 1, 1, 1, NULL),
+                                                                                                                                                                                                                               ('unidadeensino', 2, '2024-11-06 23:20:42.028000', b'1', '2024-11-06 23:20:42.028000', '123.456.789-00', '1990-01-01', 'usuarioescola@email.com', 'Nome do Usuário escola', '$2a$10$xZOX1gKxhyRJozQjxVJNmOWzQv7CBP2QmaWAc4PFumHM5DkKE0ul2', 'Gerente de contas', '123ABC', 'Almoxerifado', 5, 5, NULL, 3);
 
 INSERT INTO `requisicao` (`id`, `created_at`, `enabled`, `updated_at`, `data`, `finalizada`, `observacoes`, `departamento_id`, `solicitante_id`, `unidadeEnsino_id`) VALUES
     (1, '2024-11-06 23:21:42.056000', b'1', '2024-11-06 23:21:42.056000', '2024-11-06', b'0', 'Pedido de suprimentos para festas de halloween', 1, 1, 3);
@@ -82,3 +82,8 @@ INSERT INTO `requisicaoseparacaoitem` (`id`, `created_at`, `enabled`, `updated_a
 
 INSERT INTO `turma` (`id`, `created_at`, `enabled`, `updated_at`, `horarioFinal`, `horarioInicial`, `nome`, `quantidade`, `sala`, `unidadeEnsino_id`) VALUES
     (1, '2024-11-06 23:22:50.831000', b'1', '2024-11-06 23:22:50.831000', '2024-10-28', '2024-10-28', '5a Série', 30, '5', 3);
+
+INSERT INTO `notificacao` (`id`, `created_at`, `enabled`, `updated_at`, `horario`, `mensagem`, `visto`, `usuario_id`) VALUES
+    (1, '2024-11-06 23:06:25.000000', b'1', '2024-11-06 23:06:25.000000', '2024-11-28 13:06:25.000000', 'notificação teste 1', b'0', 1),
+    (2, '2024-11-06 23:06:25.000000', b'1', '2024-11-06 23:06:25.000000', '2024-11-28 13:08:25.000000', 'notificação teste 2', b'0', 1),
+    (3, '2024-11-06 23:06:25.000000', b'1', '2024-11-06 23:06:25.000000', '2024-11-28 13:09:25.000000', 'notificação teste 3', b'0', 1);

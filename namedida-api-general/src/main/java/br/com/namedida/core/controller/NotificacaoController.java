@@ -27,4 +27,9 @@ public class NotificacaoController extends GenericController<Notificacao> {
     public Result save(@RequestBody NotificacaoForm form) throws Exception {
         return notificacaoService.save(form);
     }
+
+    @PutMapping("/marcar-visto/{id}")
+    public Result markSeen(@PathVariable Long id) throws Exception {
+        return notificacaoService.markSeen(id);
+    }
 }
