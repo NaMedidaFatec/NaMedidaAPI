@@ -29,4 +29,10 @@ public class UnidadeEnsinoController extends GenericController<UnidadeEnsino> {
             @RequestBody UnidadeEnsinoForm form) throws Exception {
         return unidadeEnsinoService.save(form);
     }
+
+    @PostMapping("/vincular/{escolaId}/{responsavelId}")
+    public Result vincularResponsavel(
+            @PathVariable Long escolaId, @PathVariable Long responsavelId) throws Exception {
+        return unidadeEnsinoService.vincularResponsavel(escolaId, responsavelId);
+    }
 }

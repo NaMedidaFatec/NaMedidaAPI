@@ -5,6 +5,8 @@ import br.com.namedida.core.business.Result;
 import br.com.namedida.core.persistence.GenericRepository;
 import br.com.namedida.core.validator.CidadeValidator;
 import br.com.namedida.core.validator.DepartamentoValidator;
+import br.com.namedida.core.validator.ResponsavelValidator;
+import br.com.namedida.core.validator.UnidadeEnsinoValidator;
 import br.com.namedida.domain.*;
 import br.com.namedida.domain.enums.NivelEnsino;
 import br.com.namedida.domain.form.EnderecoForm;
@@ -99,6 +101,19 @@ public class UnidadeEnsinoService extends GenericService<UnidadeEnsino> {
         if (Strings.isNotBlank(form.getNivelEnsino())) {
             unidadeEnsino.setNivelEnsino(NivelEnsino.valueOf(form.getNivelEnsino()));
         }
+
+        this.executeRules(this.saveValidations, unidadeEnsino);
+
+        if (!this.result.hasErrors()) {
+            this.result.setData(this.repository.save(unidadeEnsino));
+        }
+        return this.result;
+    }
+
+    public Result vincularResponsavel(Long escolaId, Long responsavelId) throws Exception {
+        UnidadeEnsino unidadeEnsino = UnidadeEnsinoValidator.validate(escolaId);
+
+        unidadeEnsino.setResponsavel(ResponsavelValidator.validate(responsavelId));
 
         this.executeRules(this.saveValidations, unidadeEnsino);
 
