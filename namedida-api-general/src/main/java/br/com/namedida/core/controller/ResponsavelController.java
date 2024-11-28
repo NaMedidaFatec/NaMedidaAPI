@@ -19,13 +19,13 @@ public class ResponsavelController extends GenericController<Responsavel> {
     private ResponsavelService responsavelService;
 
     @Autowired
-    public ResponsavelController(ResponsavelService responsavelService) {
-        this.responsavelService = responsavelService;
+    public ResponsavelController(ResponsavelService service) {
+        this.service = service;
     }
 
     @PostMapping("/save/{nomeResponsavel}")
     public Result save(
-            @RequestParam String nomeResponsavel) throws Exception {
+            @PathVariable String nomeResponsavel) throws Exception {
         return responsavelService.save(nomeResponsavel);
     }
 }
