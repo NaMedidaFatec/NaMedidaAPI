@@ -1,0 +1,18 @@
+{
+    "sourceFile": "namedida-api-commons/src/main/java/br/com/namedida/domain/form/NotificacaoForm.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732683149732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732683149732,
+            "name": "Commit-0",
+            "content": "package br.com.namedida.domain.form;\n\nimport lombok.Data;\n\nimport java.time.LocalDate;\n\n@Data\npublic class NotificacaoForm {\n        private String mensagem;\n}\n"
+        }
+    ]
+}

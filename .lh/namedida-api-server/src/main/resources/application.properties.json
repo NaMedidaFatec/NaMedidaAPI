@@ -1,0 +1,18 @@
+{
+    "sourceFile": "namedida-api-server/src/main/resources/application.properties",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732324104671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732324104671,
+            "name": "Commit-0",
+            "content": "\nspring.application.name=namedida-api-server\nspring.jackson.time-zone=America/Sao_Paulo\n\n#JPA\nspring.sql.init.encoding=UTF-8\nspring.jpa.properties.hibernate.show_sql=false\nspring.jpa.properties.hibernate.use_sql_comments=true\nspring.jpa.properties.hibernate.format_sql=true\nspring.jpa.hibernate.ddl-auto=create-drop\nspring.jpa.generate-ddl=true\n\n#MySQL\nspring.datasource.username=root\nspring.datasource.password=sliver\nspring.datasource.name=namedida\nspring.datasource.url=jdbc:mysql://127.0.0.1:3306/namedida\nspring.jpa.show-sql=false\nspring.jpa.hibernate.ddl-auto = update\nspring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults = false\n#spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect\nspring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect\nspring.jpa.hibernate.use-new-id-generator-mappings=false\nspring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl\n#spring.datasource.driver-class-name=com.mysql.jdbc.Driver\n\n#H2\n#spring.datasource.name=namedida\n#spring.datasource.url=jdbc:h2:file:./data/namedida\n#spring.datasource.username=root\n#spring.datasource.password=\n#spring.datasource.driver-class-name=org.h2.Driver\n#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect\n#spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER\nspring.h2.console.enabled=false\n#spring.h2.console.path=/h2\n\n# Server\nspring.main.banner-mode=off\nserver.servlet.context-path=/api\nserver.port=8080\n\njwt.secret=7AYSDF-9A8SFD-ASD8F\n\n#Spring Security\nsecurity.basic.enabled=true\nmanagement.security.enabled=true\nspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration\n\n#MINIO\nminio.access.endpoint=bucket-production-5b1f.up.railway.app\nminio.access.accessKey=K3ifOZJ1Hf4VNdkLJI15l0n9QeUuiA3w\nminio.access.secretKey=sNCSrPoFsyYbmCRovshh8WmUIzSMGfRXLVbpT9GIHH5mNZuc\nminio.bucket.name=namedida\n\n#MULTIPART\nspring.servlet.multipart.enabled=true\nspring.servlet.multipart.file-size-threshold=4KB\nspring.servlet.multipart.max-file-size=256MB\nspring.servlet.multipart.max-request-size=512MB"
+        }
+    ]
+}

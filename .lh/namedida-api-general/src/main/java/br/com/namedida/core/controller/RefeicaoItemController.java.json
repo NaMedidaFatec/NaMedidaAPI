@@ -1,0 +1,22 @@
+{
+    "sourceFile": "namedida-api-general/src/main/java/br/com/namedida/core/controller/RefeicaoItemController.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1732846712697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1732846719803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,13 +16,9 @@\n         methods = {RequestMethod.HEAD, RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}\n )\n @RestController\n @RequestMapping(\"/refeicaoitem\")\n-<<<<<<< HEAD\n public class RefeicaoItemController extends GenericController<UnidadeEnsinoRefeicaoItem> {\n-=======\n-public class RefeicaoItemController extends GenericController<RequisicaoItem> {\n->>>>>>> 74c5a0005a0cfdc71b88133322b93dd6bb40a218\n     @Autowired\n     private RefeicaoItemService refeicaoService;\n \n     @Autowired\n"
+                }
+            ],
+            "date": 1732846712697,
+            "name": "Commit-0",
+            "content": "package br.com.namedida.core.controller;\n\nimport br.com.namedida.core.business.Result;\nimport br.com.namedida.core.service.RefeicaoItemService;\nimport br.com.namedida.domain.UnidadeEnsinoRefeicaoItem;\nimport br.com.namedida.domain.dto.ResponseDTO;\nimport br.com.namedida.domain.form.UnidadeEnsinoRefeicaoItemForm;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.*;\n\n@CrossOrigin(\n        origins = \"*\",\n        allowedHeaders = \"*\",\n        methods = {RequestMethod.HEAD, RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}\n)\n@RestController\n@RequestMapping(\"/refeicaoitem\")\n<<<<<<< HEAD\npublic class RefeicaoItemController extends GenericController<UnidadeEnsinoRefeicaoItem> {\n=======\npublic class RefeicaoItemController extends GenericController<RequisicaoItem> {\n>>>>>>> 74c5a0005a0cfdc71b88133322b93dd6bb40a218\n    @Autowired\n    private RefeicaoItemService refeicaoService;\n\n    @Autowired\n    public RefeicaoItemController(RefeicaoItemService service) {\n        this.service = service;\n    }\n\n    @GetMapping(\"/refeicao/{id}\")\n    public ResponseEntity<ResponseDTO> getItens(@PathVariable Long id) throws Exception {\n        return this.generateResponse(refeicaoService.getItens(id), HttpStatus.OK);\n    }\n\n    @PostMapping(\"/save\")\n    public Result save(\n            @RequestBody UnidadeEnsinoRefeicaoItemForm form) throws Exception {\n        return refeicaoService.save(form);\n    }\n}\n"
+        }
+    ]
+}

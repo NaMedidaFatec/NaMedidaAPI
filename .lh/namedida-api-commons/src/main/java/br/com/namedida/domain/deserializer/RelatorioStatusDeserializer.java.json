@@ -1,0 +1,18 @@
+{
+    "sourceFile": "namedida-api-commons/src/main/java/br/com/namedida/domain/deserializer/RelatorioStatusDeserializer.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732838259795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732838259795,
+            "name": "Commit-0",
+            "content": "package br.com.namedida.domain.deserializer;\n\nimport br.com.namedida.domain.enums.RelatorioStatus;\nimport com.fasterxml.jackson.core.JsonParser;\nimport com.fasterxml.jackson.databind.DeserializationContext;\nimport com.fasterxml.jackson.databind.JsonDeserializer;\nimport com.fasterxml.jackson.databind.JsonNode;\n\nimport java.io.IOException;\n\npublic class RelatorioStatusDeserializer extends JsonDeserializer<RelatorioStatus> {\n    @Override\n    public RelatorioStatus deserialize(JsonParser parser, DeserializationContext context)\n            throws IOException {\n\n        JsonNode node = parser.getCodec().readTree(parser);\n\n        String value = node.asText();\n\n        for (RelatorioStatus relatorioStatus : RelatorioStatus.values()) {\n            if (RelatorioStatus.valueOf(value).equals(relatorioStatus)) {\n                return relatorioStatus;\n            }\n        }\n\n        throw new IllegalArgumentException(\"Status do relatório desconhecido: \" + value);\n    }\n}\n"
+        }
+    ]
+}

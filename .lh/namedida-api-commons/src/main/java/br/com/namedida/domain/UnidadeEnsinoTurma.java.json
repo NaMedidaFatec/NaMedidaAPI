@@ -1,0 +1,26 @@
+{
+    "sourceFile": "namedida-api-commons/src/main/java/br/com/namedida/domain/UnidadeEnsinoTurma.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1732451307857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1732451529099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,15 @@\n package br.com.namedida.domain;\n \n \n+<<<<<<< HEAD\n+import com.fasterxml.jackson.annotation.JsonFormat;\n+=======\n+import br.com.namedida.domain.deserializer.UnidadeEnsinoDeserializer;\n+>>>>>>> e9603fd592a52246d60927f90298ca4b6226cd4e\n import com.fasterxml.jackson.annotation.JsonIgnore;\n+import com.fasterxml.jackson.annotation.JsonProperty;\n+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;\n import jakarta.persistence.Entity;\n import jakarta.persistence.ManyToOne;\n import jakarta.persistence.Table;\n import lombok.*;\n@@ -17,13 +24,17 @@\n @Entity\n public class UnidadeEnsinoTurma extends EntidadeDominio {\n     private String nome;\n     private Integer quantidade;\n+    @JsonFormat(pattern = \"dd/MM/yyyy\")\n     private LocalDate horarioInicial;\n+    @JsonFormat(pattern = \"dd/MM/yyyy\")\n     private LocalDate horarioFinal;\n     private String sala;\n \n     @ManyToOne\n+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)\n+    @JsonDeserialize(using = UnidadeEnsinoDeserializer.class)\n     private UnidadeEnsino unidadeEnsino;\n \n     @Builder(builderMethodName=\"unidadeensinoturmaBuilder\")\n     public UnidadeEnsinoTurma(String nome, Integer quantidade, LocalDate horarioInicial, LocalDate horarioFinal, String sala, UnidadeEnsino unidadeEnsino) {\n"
+                },
+                {
+                    "date": 1732451537534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,8 @@\n package br.com.namedida.domain;\n \n \n-<<<<<<< HEAD\n-import com.fasterxml.jackson.annotation.JsonFormat;\n-=======\n import br.com.namedida.domain.deserializer.UnidadeEnsinoDeserializer;\n->>>>>>> e9603fd592a52246d60927f90298ca4b6226cd4e\n import com.fasterxml.jackson.annotation.JsonIgnore;\n import com.fasterxml.jackson.annotation.JsonProperty;\n import com.fasterxml.jackson.databind.annotation.JsonDeserialize;\n import jakarta.persistence.Entity;\n"
+                }
+            ],
+            "date": 1732451307857,
+            "name": "Commit-0",
+            "content": "package br.com.namedida.domain;\n\n\nimport com.fasterxml.jackson.annotation.JsonIgnore;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.ManyToOne;\nimport jakarta.persistence.Table;\nimport lombok.*;\n\nimport java.time.LocalDate;\n\n@Getter\n@Setter\n@RequiredArgsConstructor\n@ToString\n@Table(name = \"turma\")\n@Entity\npublic class UnidadeEnsinoTurma extends EntidadeDominio {\n    private String nome;\n    private Integer quantidade;\n    private LocalDate horarioInicial;\n    private LocalDate horarioFinal;\n    private String sala;\n\n    @ManyToOne\n    private UnidadeEnsino unidadeEnsino;\n\n    @Builder(builderMethodName=\"unidadeensinoturmaBuilder\")\n    public UnidadeEnsinoTurma(String nome, Integer quantidade, LocalDate horarioInicial, LocalDate horarioFinal, String sala, UnidadeEnsino unidadeEnsino) {\n        this.nome = nome;\n        this.quantidade = quantidade;\n        this.horarioInicial = horarioInicial;\n        this.horarioFinal = horarioFinal;\n        this.sala = sala;\n        this.unidadeEnsino = unidadeEnsino;\n    }\n}\n"
+        }
+    ]
+}

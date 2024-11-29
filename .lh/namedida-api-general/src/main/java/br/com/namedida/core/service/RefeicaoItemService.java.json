@@ -1,0 +1,18 @@
+{
+    "sourceFile": "namedida-api-general/src/main/java/br/com/namedida/core/service/RefeicaoItemService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732846729577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732846729577,
+            "name": "Commit-0",
+            "content": "package br.com.namedida.core.service;\n\nimport br.com.namedida.core.business.IValidation;\nimport br.com.namedida.core.business.Result;\nimport br.com.namedida.core.persistence.UnidadeEnsinoRefeicaoItemRepository;\nimport br.com.namedida.core.service.security.bean.StakeholdersBean;\nimport br.com.namedida.core.validator.ProdutoValidator;\nimport br.com.namedida.core.validator.UnidadeEnsinoRefeicaoValidator;\nimport br.com.namedida.domain.UnidadeEnsinoRefeicaoItem;\nimport br.com.namedida.domain.form.UnidadeEnsinoRefeicaoItemForm;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.stereotype.Service;\n\nimport java.util.List;\n\n@Service\npublic class RefeicaoItemService extends GenericService<UnidadeEnsinoRefeicaoItem> {\n    private final UnidadeEnsinoRefeicaoItemRepository customRepository;\n\n    @Autowired\n    public RefeicaoItemService(\n            UnidadeEnsinoRefeicaoItemRepository repository,\n            List<IValidation<UnidadeEnsinoRefeicaoItem>> saveValidations,\n            List<IValidation<UnidadeEnsinoRefeicaoItem>> updateValidation, StakeholdersBean stakeholdersBean)\n    {\n        super();\n        this.repository = repository;\n        this.customRepository = repository;\n        this.saveValidations = saveValidations;\n        this.updateValidations = updateValidation;\n    }\n\n    public Result save(UnidadeEnsinoRefeicaoItemForm form) throws Exception {\n        UnidadeEnsinoRefeicaoItem refeicaoItem = UnidadeEnsinoRefeicaoItem.refeicaoItemBuilder()\n                .quantidade(form.getQuantidade())\n                .produto(ProdutoValidator.validate(form.getProduto()))\n                .refeicao(UnidadeEnsinoRefeicaoValidator.validate(form.getRefeicao()))\n                .build();\n        this.executeRules(this.saveValidations, refeicaoItem);\n        if (!this.result.hasErrors()) {\n            this.result.setData(this.repository.save(refeicaoItem));\n        }\n        return this.result;\n    }\n\n    public Result getItens(Long refeicaoId) throws Exception {\n        if (!this.result.hasErrors()) {\n            this.result.setData(customRepository.findAllByRefeicao(UnidadeEnsinoRefeicaoValidator.validate(refeicaoId)));\n        }\n        return this.result;\n    }\n}"
+        }
+    ]
+}

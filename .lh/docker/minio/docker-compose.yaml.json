@@ -1,0 +1,18 @@
+{
+    "sourceFile": "docker/minio/docker-compose.yaml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1731261917359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1731261917359,
+            "name": "Commit-0",
+            "content": "version: '3'\n\nservices:\n  minio:\n    image: docker.io/bitnami/minio:2022\n    ports:\n      - '9000:9000'\n      - '9001:9001'\n    networks:\n      - minionetwork\n    volumes:\n      - 'minio_data:/data'\n    environment:\n      - MINIO_ROOT_USER=namedida\n      - MINIO_ROOT_PASSWORD=namedida\n      - MINIO_DEFAULT_BUCKETS=namedida\n\nnetworks:\n  minionetwork:\n    driver: bridge\n\nvolumes:\n  minio_data:\n    driver: local"
+        }
+    ]
+}
