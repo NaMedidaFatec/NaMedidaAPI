@@ -23,6 +23,9 @@ public class StakeholdersBean {
     }
 
     public Departamento getDepartamento() {
-        return usuarioDepartamento.getDepartamento();
+        if (usuarioDepartamento != null) {
+            return usuarioDepartamento.getDepartamento();
+        }
+        return usuarioUnidadeEnsino.getUnidadeEnsino().getDepartamento();
     }
 }

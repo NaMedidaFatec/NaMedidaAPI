@@ -5,7 +5,9 @@ import br.com.namedida.core.service.RequisicaoService;
 import br.com.namedida.domain.Requisicao;
 import br.com.namedida.domain.form.RequisicaoForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.core.io.Resource;
 
 @CrossOrigin(
         origins = "*",
@@ -27,5 +29,10 @@ public class RequisicaoController extends GenericController<Requisicao> {
     public Result save(
             @RequestBody RequisicaoForm form) throws Exception {
         return requisicaoService.save(form);
+    }
+
+    @GetMapping("/{id}/download-relatorio-excel")
+    public ResponseEntity<Resource> downloadRelatorioExcel(@PathVariable Long id) throws Exception {
+        return requisicaoService.gerarRelatorio(id);
     }
 }

@@ -20,15 +20,17 @@ import java.util.List;
 public class RequisicaoSeparacaoService extends GenericService<RequisicaoSeparacao> {
     private final StakeholdersBean stakeholdersBean;
     private final RequisicaoSeparacaoRepository customRepository;
+    private final NotificacaoService notificacaoService;
 
     @Autowired
     public RequisicaoSeparacaoService(
             RequisicaoSeparacaoRepository repository,
             List<IValidation<RequisicaoSeparacao>> saveValidations,
-            List<IValidation<RequisicaoSeparacao>> updateValidation, StakeholdersBean stakeholdersBean)
+            List<IValidation<RequisicaoSeparacao>> updateValidation, StakeholdersBean stakeholdersBean, NotificacaoService notificacaoService)
     {
         super();
         this.customRepository = repository;
+        this.notificacaoService = notificacaoService;
         this.repository = repository;
         this.saveValidations = saveValidations;
         this.updateValidations = updateValidation;
@@ -38,7 +40,7 @@ public class RequisicaoSeparacaoService extends GenericService<RequisicaoSeparac
     public Result save(RequisicaoSeparacaoForm form) throws Exception {
         Usuario separadoPor = stakeholdersBean.getUsuarioDepartamento() != null ? stakeholdersBean.getUsuarioDepartamento() : stakeholdersBean.getUsuarioUnidadeEnsino();
 
-        RequisicaoSeparacao requisicao = RequisicaoSeparacao.requisicaoSeparacaoBuilder()
+        RequisicaoSeparacao requisicaoSeparacao = RequisicaoSeparacao.requisicaoSeparacaoBuilder()
                 .id(form.getId())
                 .observacoes(form.getObservacoes())
                 .data(form.getData())
@@ -47,10 +49,16 @@ public class RequisicaoSeparacaoService extends GenericService<RequisicaoSeparac
                 .separadoPor(separadoPor)
                 .build();
 
-        this.executeRules(this.saveValidations, requisicao);
+        this.executeRules(this.saveValidations, requisicaoSeparacao);
         if (!this.result.hasErrors()) {
-            this.result.setData(this.repository.save(requisicao));
+            requisicaoSeparacao = this.repository.save(requisicaoSeparacao);
+            this.result.setData(requisicaoSeparacao);
         }
+
+        if (requisicaoSeparacao != null) {
+            notificacaoService.sendNotificacaoRequisicaoSeparacao(requisicaoSeparacao);
+        }
+
         return this.result;
     }
 

@@ -3,8 +3,11 @@ package br.com.namedida.core.controller;
 import br.com.namedida.core.business.Result;
 import br.com.namedida.core.service.NotificacaoService;
 import br.com.namedida.domain.Notificacao;
+import br.com.namedida.domain.dto.ResponseDTO;
 import br.com.namedida.domain.form.NotificacaoForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(
@@ -26,6 +29,11 @@ public class NotificacaoController extends GenericController<Notificacao> {
     @PostMapping("/save")
     public Result save(@RequestBody NotificacaoForm form) throws Exception {
         return notificacaoService.save(form);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<ResponseDTO> getAllMyNoticacoes() throws Exception {
+        return this.generateResponse(notificacaoService.getAllMe(), HttpStatus.OK);
     }
 
     @PutMapping("/marcar-visto/{id}")
