@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -17,14 +18,14 @@ public class UnidadeEnsinoRefeicao extends EntidadeDominio {
     private String nome;
     private String descricao;
 
-    private LocalDateTime horarioDisponibilidade;
+    private LocalTime horarioDisponibilidade;
 
     @ManyToOne
     @JsonIgnore
     private UnidadeEnsino unidadeEnsino;
 
     @Builder(builderMethodName="unidadeensinorefeicaoBuilder")
-    public UnidadeEnsinoRefeicao(String nome, String descricao, LocalDateTime horarioDisponibilidade, UnidadeEnsino unidadeEnsino) {
+    public UnidadeEnsinoRefeicao(String nome, String descricao, LocalTime horarioDisponibilidade, UnidadeEnsino unidadeEnsino) {
         this.nome = nome;
         this.descricao = descricao;
         this.horarioDisponibilidade = horarioDisponibilidade;
