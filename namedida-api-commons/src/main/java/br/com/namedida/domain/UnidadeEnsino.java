@@ -36,6 +36,9 @@ public class UnidadeEnsino extends PessoaJuridica {
     @Formula("(SELECT getRefeicoesUnidade(id))")
     private Integer qtdRefeicoes = 0;
 
+    @Formula("(SELECT getQtdRelatoriosEntregues(id))")
+    private Integer qtdRelatoriosEntregues = 0;
+
     @Enumerated(EnumType.STRING)
     private NivelEnsino nivelEnsino;
 
