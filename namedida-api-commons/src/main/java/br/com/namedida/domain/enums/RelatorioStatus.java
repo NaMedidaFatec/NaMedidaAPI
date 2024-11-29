@@ -1,9 +1,16 @@
 package br.com.namedida.domain.enums;
 
+import br.com.namedida.domain.deserializer.RelatorioStatusDeserializer;
+import br.com.namedida.domain.serializer.RelatorioStatusSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize(using = RelatorioStatusSerializer.class)
+@JsonDeserialize(using = RelatorioStatusDeserializer.class)
 public enum RelatorioStatus {
-    ENVIADO("Enviado"),
     EM_ANALISE("Em análise"),
-    CONCLUIDO("Concluído");
+    APROVADO("Aprovado"),
+    REPROVADO("Reprovado");
 
     private RelatorioStatus(String descricao) {
         this.descricao = descricao;

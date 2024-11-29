@@ -12,6 +12,7 @@ import br.com.namedida.domain.form.LoteForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -36,9 +37,10 @@ public class LoteService extends GenericService<Lote> {
         Lote lote = Lote.loteBuilder()
                 .nome(form.getNome())
                 .dataFabricacao(form.getDataFabricacao())
-                .dataValidade(form.getDataFabricacao())
+                .dataValidade(form.getDataValidade())
                 .produto(ProdutoValidator.validate(form.getProduto()))
                 .quantidade(form.getQuantidade())
+                .valorUnitario(form.getValorUnitario())
                 .build();
 
         this.executeRules(this.saveValidations, lote);
@@ -62,7 +64,7 @@ public class LoteService extends GenericService<Lote> {
 
     public Result getLotesWithEstoqueLivreByProduto(Long produtoId) throws Exception {
         if (!this.result.hasErrors()) {
-            this.result.setData(customRepository.findAllByProdutoAndQuantidadeGreaterThan(ProdutoValidator.validate(produtoId), 0d));
+            this.result.setData(customRepository.findAllByProdutoAndQuantidadeGreaterThanAndDataValidadeAfter(ProdutoValidator.validate(produtoId), 0d, LocalDate.now().minusDays(1)));
         }
         return this.result;
     }

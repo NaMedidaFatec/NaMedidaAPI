@@ -10,5 +10,6 @@ public class LoteForm {
         private LocalDate dataFabricacao;
         private LocalDate dataValidade;
         private Double quantidade;
+        private Double valorUnitario;
         private Long produto;
 }

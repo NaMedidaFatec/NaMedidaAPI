@@ -50,3 +50,18 @@ DELIMITER ;
 
 
 
+DROP FUNCTION IF EXISTS getQtdRelatoriosEntregues;
+DELIMITER $$
+CREATE FUNCTION `getQtdRelatoriosEntregues`(`p_unidadeensino` INT(11)) RETURNS int(11)
+                                                                                  READS SQL DATA
+BEGIN
+    DECLARE r_total int;
+SELECT COALESCE(COUNT(*), 0) from relatorio r where r.unidadeEnsino_id = p_unidadeensino
+    INTO r_total;
+RETURN r_total;
+END$$
+DELIMITER ;
+
+
+
+

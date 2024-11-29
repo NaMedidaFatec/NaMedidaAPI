@@ -3,8 +3,11 @@ package br.com.namedida.core.controller;
 import br.com.namedida.core.business.Result;
 import br.com.namedida.core.service.RelatorioService;
 import br.com.namedida.domain.Relatorio;
+import br.com.namedida.domain.dto.ResponseDTO;
 import br.com.namedida.domain.form.RelatorioForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(
@@ -27,5 +30,10 @@ public class RelatorioController extends GenericController<Relatorio> {
     public Result save(
             @RequestBody RelatorioForm form) throws Exception {
         return relatorioService.save(form);
+    }
+
+    @GetMapping("/unidadeensino/{id}")
+    public ResponseEntity<ResponseDTO> getRelatoriosByUnidadeEnsino(@PathVariable Long id) throws Exception {
+        return this.generateResponse(relatorioService.getRelatoriosByUnidadeEnsino(id), HttpStatus.OK);
     }
 }

@@ -26,7 +26,6 @@ public class UsuarioUnidadeEnsino extends Usuario {
 
     @Builder(builderMethodName="usuarioUnidadeEnsino")
     public UsuarioUnidadeEnsino(String nome, String cpf, LocalDate dataNascimento, String email, String username, String password, Endereco endereco, Telefone telefone, String setor, String cargo, String registro, UnidadeEnsino unidadeEnsino) {
-        super(nome, cpf, dataNascimento, email, username, password, endereco, telefone, TipoUsuario.UNIDADE_ENSINO.name());
         this.setor = setor;
         this.cargo = cargo;
         this.registro = registro;

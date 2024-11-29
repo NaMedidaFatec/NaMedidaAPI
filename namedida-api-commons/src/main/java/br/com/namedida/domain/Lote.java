@@ -38,12 +38,15 @@ public class Lote extends EntidadeDominio {
     @JsonDeserialize(using = ProdutoDeserializer.class)
     private Produto produto;
 
+    private Double valorUnitario = 0d;
+
     @Builder(builderMethodName="loteBuilder")
-    public Lote(String nome, LocalDate dataFabricacao, LocalDate dataValidade, Double quantidade, Produto produto) {
+    public Lote(String nome, LocalDate dataFabricacao, LocalDate dataValidade, Double quantidade, Produto produto, Double valorUnitario) {
         this.nome = nome;
         this.dataFabricacao = dataFabricacao;
         this.dataValidade = dataValidade;
         this.quantidade = quantidade;
         this.produto = produto;
+        this.valorUnitario = valorUnitario;
     }
 }
