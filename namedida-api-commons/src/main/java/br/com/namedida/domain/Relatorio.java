@@ -1,8 +1,11 @@
 package br.com.namedida.domain;
 
 
+import br.com.namedida.domain.deserializer.UnidadeEnsinoDeserializer;
 import br.com.namedida.domain.enums.RelatorioStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,7 +29,8 @@ public class Relatorio extends EntidadeDominio {
     private RelatorioStatus status = RelatorioStatus.EM_ANALISE;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonDeserialize(using = UnidadeEnsinoDeserializer.class)
     private UnidadeEnsino unidadeEnsino;
 
     @Builder(builderMethodName="relatorioBuilder")
