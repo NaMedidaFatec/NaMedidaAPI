@@ -25,7 +25,8 @@ public class UsuarioUnidadeEnsino extends Usuario {
     private UnidadeEnsino unidadeEnsino;
 
     @Builder(builderMethodName="usuarioUnidadeEnsino")
-    public UsuarioUnidadeEnsino(String nome, String cpf, LocalDate dataNascimento, String email, String username, String password, Endereco endereco, Telefone telefone, String setor, String cargo, String registro, UnidadeEnsino unidadeEnsino) {
+    public UsuarioUnidadeEnsino(String nome, String cpf, LocalDate dataNascimento, String email, String username, String password, Endereco endereco, Telefone telefone, String tipoUsuario, String setor, String cargo, String registro, UnidadeEnsino unidadeEnsino) {
+        super(nome, cpf, dataNascimento, email, username, password, endereco, telefone, tipoUsuario);
         this.setor = setor;
         this.cargo = cargo;
         this.registro = registro;
